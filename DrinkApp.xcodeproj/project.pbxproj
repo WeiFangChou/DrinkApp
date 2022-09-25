@@ -99,7 +99,6 @@
 		15968D2128E031D300E28278 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				15968D2828E0328100E28278 /* Controller */,
 				15968D2728E0327B00E28278 /* Cell */,
 				1555D3C028DB7B8900650C1C /* CustomBarItem.swift */,
 			);
@@ -109,6 +108,12 @@
 		15968D2228E031DB00E28278 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				15FAA06F28DB781C009D77D1 /* CustomTabBarController.swift */,
+				15FAA06728DB73EF009D77D1 /* HomeNavigationController.swift */,
+				15FAA06D28DB7799009D77D1 /* HomeTabBarController.swift */,
+				15FAA06928DB7445009D77D1 /* HomeViewController.swift */,
+				15FAA06B28DB748D009D77D1 /* PickUpViewController.swift */,
+				1555D3C228DB7FAC00650C1C /* ShopViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -154,19 +159,6 @@
 				1555D3C428E02DD200650C1C /* HomeTableViewCell.swift */,
 			);
 			path = Cell;
-			sourceTree = "<group>";
-		};
-		15968D2828E0328100E28278 /* Controller */ = {
-			isa = PBXGroup;
-			children = (
-				15FAA06728DB73EF009D77D1 /* HomeNavigationController.swift */,
-				15FAA06928DB7445009D77D1 /* HomeViewController.swift */,
-				1555D3C228DB7FAC00650C1C /* ShopViewController.swift */,
-				15FAA06B28DB748D009D77D1 /* PickUpViewController.swift */,
-				15FAA06D28DB7799009D77D1 /* HomeTabBarController.swift */,
-				15FAA06F28DB781C009D77D1 /* CustomTabBarController.swift */,
-			);
-			path = Controller;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

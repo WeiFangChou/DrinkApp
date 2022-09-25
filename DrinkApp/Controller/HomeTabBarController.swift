@@ -23,7 +23,11 @@ class HomeTabBarController: UITabBarController, UITabBarControllerDelegate{
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        setViewControllers([homeViewController,drinkViewController,shopViewController], animated: true)
+        let navigationHomeView = UINavigationController(rootViewController: homeViewController)
+        let navigationDrinkView = UINavigationController(rootViewController: drinkViewController)
+        let navigationShopView = UINavigationController(rootViewController: shopViewController)
+        
+        setViewControllers([navigationHomeView,navigationDrinkView,navigationShopView], animated: true)
         tabBar.backgroundColor = UIColor(named: "MilkGreen")
         setMiddleButton()
     }
@@ -32,17 +36,13 @@ class HomeTabBarController: UITabBarController, UITabBarControllerDelegate{
     
     func settingTabbarItem() {
         let image = UIImage(named: "shop")
-        
-        
-        
+
     }
     
     @objc func tapPickButton() {
         
         print("Pickup")
         let viewcontroller = PickUpViewController()
-        
-        
         present(viewcontroller, animated: true)
     }
     

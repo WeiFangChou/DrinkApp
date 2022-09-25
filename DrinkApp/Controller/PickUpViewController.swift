@@ -29,6 +29,7 @@ class PickUpViewController: UIViewController {
         
         
         title = "商店"
+        view.backgroundColor = .blue
         
     }
 

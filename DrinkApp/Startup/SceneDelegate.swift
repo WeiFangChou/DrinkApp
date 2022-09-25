@@ -21,9 +21,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         navController = homeTabBarController
         
         window?.rootViewController = navController
-        window?.makeKeyAndVisible()
+//        window?.makeKeyAndVisible()
         
-        Thread.sleep(forTimeInterval: 3)
+//        Thread.sleep(forTimeInterval: 3)
         
     }
 

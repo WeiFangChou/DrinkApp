@@ -22,16 +22,16 @@ import Foundation
  "new":false,
  */
 
-struct DrinksMenu {
+struct DrinksMenu: Codable {
     let id: UUID?
     let name : String
     let type : String
-    let midPrice: String
-    let largePrice : String
+    let midPrice: Int?
+    let largePrice : Int
     let hot : Bool
     let cold : Bool
     let caffeine : Bool
     let recommend : Bool
     let new : Bool
-    let remark : String
+    let remark : String?
 }
