@@ -9,21 +9,41 @@
 /* Begin PBXBuildFile section */
 		1534EB5F28C6429100BBE7D0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1534EB5E28C6429100BBE7D0 /* AppDelegate.swift */; };
 		1534EB6128C6429100BBE7D0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1534EB6028C6429100BBE7D0 /* SceneDelegate.swift */; };
-		1534EB6328C6429100BBE7D0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1534EB6228C6429100BBE7D0 /* ViewController.swift */; };
 		1534EB6628C6429100BBE7D0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1534EB6428C6429100BBE7D0 /* Main.storyboard */; };
 		1534EB6828C6429200BBE7D0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1534EB6728C6429200BBE7D0 /* Assets.xcassets */; };
 		1534EB6B28C6429200BBE7D0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1534EB6928C6429200BBE7D0 /* LaunchScreen.storyboard */; };
+		1555D3C128DB7B8900650C1C /* CustomBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1555D3C028DB7B8900650C1C /* CustomBarItem.swift */; };
+		1555D3C328DB7FAC00650C1C /* ShopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1555D3C228DB7FAC00650C1C /* ShopViewController.swift */; };
+		1555D3C628E02DD200650C1C /* HomeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1555D3C428E02DD200650C1C /* HomeTableViewCell.swift */; };
+		1555D3C728E02DD200650C1C /* HomeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1555D3C528E02DD200650C1C /* HomeTableViewCell.xib */; };
+		15968D2A28E0332C00E28278 /* APICaller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15968D2928E0332C00E28278 /* APICaller.swift */; };
+		15968D2C28E0335200E28278 /* DrinksMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15968D2B28E0335200E28278 /* DrinksMenu.swift */; };
+		15FAA06828DB73EF009D77D1 /* HomeNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15FAA06728DB73EF009D77D1 /* HomeNavigationController.swift */; };
+		15FAA06A28DB7445009D77D1 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15FAA06928DB7445009D77D1 /* HomeViewController.swift */; };
+		15FAA06C28DB748D009D77D1 /* PickUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15FAA06B28DB748D009D77D1 /* PickUpViewController.swift */; };
+		15FAA06E28DB7799009D77D1 /* HomeTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15FAA06D28DB7799009D77D1 /* HomeTabBarController.swift */; };
+		15FAA07028DB781C009D77D1 /* CustomTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15FAA06F28DB781C009D77D1 /* CustomTabBarController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		1534EB5B28C6429100BBE7D0 /* DrinkApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DrinkApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1534EB5E28C6429100BBE7D0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1534EB6028C6429100BBE7D0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		1534EB6228C6429100BBE7D0 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		1534EB6528C6429100BBE7D0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		1534EB6728C6429200BBE7D0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1534EB6A28C6429200BBE7D0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1534EB6C28C6429200BBE7D0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1555D3C028DB7B8900650C1C /* CustomBarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomBarItem.swift; sourceTree = "<group>"; };
+		1555D3C228DB7FAC00650C1C /* ShopViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopViewController.swift; sourceTree = "<group>"; };
+		1555D3C428E02DD200650C1C /* HomeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTableViewCell.swift; sourceTree = "<group>"; };
+		1555D3C528E02DD200650C1C /* HomeTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeTableViewCell.xib; sourceTree = "<group>"; };
+		15968D2928E0332C00E28278 /* APICaller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APICaller.swift; sourceTree = "<group>"; };
+		15968D2B28E0335200E28278 /* DrinksMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinksMenu.swift; sourceTree = "<group>"; };
+		15FAA06728DB73EF009D77D1 /* HomeNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeNavigationController.swift; sourceTree = "<group>"; };
+		15FAA06928DB7445009D77D1 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		15FAA06B28DB748D009D77D1 /* PickUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickUpViewController.swift; sourceTree = "<group>"; };
+		15FAA06D28DB7799009D77D1 /* HomeTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTabBarController.swift; sourceTree = "<group>"; };
+		15FAA06F28DB781C009D77D1 /* CustomTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBarController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,15 +76,97 @@
 		1534EB5D28C6429100BBE7D0 /* DrinkApp */ = {
 			isa = PBXGroup;
 			children = (
-				1534EB5E28C6429100BBE7D0 /* AppDelegate.swift */,
-				1534EB6028C6429100BBE7D0 /* SceneDelegate.swift */,
-				1534EB6228C6429100BBE7D0 /* ViewController.swift */,
-				1534EB6428C6429100BBE7D0 /* Main.storyboard */,
-				1534EB6728C6429200BBE7D0 /* Assets.xcassets */,
-				1534EB6928C6429200BBE7D0 /* LaunchScreen.storyboard */,
 				1534EB6C28C6429200BBE7D0 /* Info.plist */,
+				15968D2628E0326400E28278 /* Storyboard */,
+				15968D2528E0324300E28278 /* Resource */,
+				15968D2428E0323900E28278 /* Startup */,
+				15968D2328E031E600E28278 /* Network Manager */,
+				15968D2228E031DB00E28278 /* Controller */,
+				15968D2128E031D300E28278 /* View */,
+				15968D2028E031CC00E28278 /* Model */,
 			);
 			path = DrinkApp;
+			sourceTree = "<group>";
+		};
+		15968D2028E031CC00E28278 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				15968D2B28E0335200E28278 /* DrinksMenu.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		15968D2128E031D300E28278 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				15968D2828E0328100E28278 /* Controller */,
+				15968D2728E0327B00E28278 /* Cell */,
+				1555D3C028DB7B8900650C1C /* CustomBarItem.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		15968D2228E031DB00E28278 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		15968D2328E031E600E28278 /* Network Manager */ = {
+			isa = PBXGroup;
+			children = (
+				15968D2928E0332C00E28278 /* APICaller.swift */,
+			);
+			path = "Network Manager";
+			sourceTree = "<group>";
+		};
+		15968D2428E0323900E28278 /* Startup */ = {
+			isa = PBXGroup;
+			children = (
+				1534EB5E28C6429100BBE7D0 /* AppDelegate.swift */,
+				1534EB6028C6429100BBE7D0 /* SceneDelegate.swift */,
+			);
+			path = Startup;
+			sourceTree = "<group>";
+		};
+		15968D2528E0324300E28278 /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				1534EB6728C6429200BBE7D0 /* Assets.xcassets */,
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
+		15968D2628E0326400E28278 /* Storyboard */ = {
+			isa = PBXGroup;
+			children = (
+				1534EB6928C6429200BBE7D0 /* LaunchScreen.storyboard */,
+				1534EB6428C6429100BBE7D0 /* Main.storyboard */,
+				1555D3C528E02DD200650C1C /* HomeTableViewCell.xib */,
+			);
+			path = Storyboard;
+			sourceTree = "<group>";
+		};
+		15968D2728E0327B00E28278 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				1555D3C428E02DD200650C1C /* HomeTableViewCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		15968D2828E0328100E28278 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				15FAA06728DB73EF009D77D1 /* HomeNavigationController.swift */,
+				15FAA06928DB7445009D77D1 /* HomeViewController.swift */,
+				1555D3C228DB7FAC00650C1C /* ShopViewController.swift */,
+				15FAA06B28DB748D009D77D1 /* PickUpViewController.swift */,
+				15FAA06D28DB7799009D77D1 /* HomeTabBarController.swift */,
+				15FAA06F28DB781C009D77D1 /* CustomTabBarController.swift */,
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -127,6 +229,7 @@
 			files = (
 				1534EB6B28C6429200BBE7D0 /* LaunchScreen.storyboard in Resources */,
 				1534EB6828C6429200BBE7D0 /* Assets.xcassets in Resources */,
+				1555D3C728E02DD200650C1C /* HomeTableViewCell.xib in Resources */,
 				1534EB6628C6429100BBE7D0 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -138,9 +241,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1534EB6328C6429100BBE7D0 /* ViewController.swift in Sources */,
 				1534EB5F28C6429100BBE7D0 /* AppDelegate.swift in Sources */,
+				1555D3C328DB7FAC00650C1C /* ShopViewController.swift in Sources */,
+				15FAA07028DB781C009D77D1 /* CustomTabBarController.swift in Sources */,
+				15968D2C28E0335200E28278 /* DrinksMenu.swift in Sources */,
+				15FAA06E28DB7799009D77D1 /* HomeTabBarController.swift in Sources */,
+				1555D3C628E02DD200650C1C /* HomeTableViewCell.swift in Sources */,
+				1555D3C128DB7B8900650C1C /* CustomBarItem.swift in Sources */,
+				15FAA06C28DB748D009D77D1 /* PickUpViewController.swift in Sources */,
 				1534EB6128C6429100BBE7D0 /* SceneDelegate.swift in Sources */,
+				15968D2A28E0332C00E28278 /* APICaller.swift in Sources */,
+				15FAA06828DB73EF009D77D1 /* HomeNavigationController.swift in Sources */,
+				15FAA06A28DB7445009D77D1 /* HomeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
