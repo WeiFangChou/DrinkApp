@@ -24,7 +24,7 @@ class ShopViewController: UIViewController {
     
     
     func updateUI() {
-        title = "訂購"
+
         
         
     }

@@ -27,9 +27,29 @@ class HomeTabBarController: UITabBarController, UITabBarControllerDelegate{
         let navigationDrinkView = UINavigationController(rootViewController: drinkViewController)
         let navigationShopView = UINavigationController(rootViewController: shopViewController)
         
+        
+        navigationHomeView.navigationBar.barTintColor = UIColor(named: "MilkGreen")
+        navigationHomeView.tabBarItem.title = "菜單"
+        navigationHomeView.hidesBarsOnSwipe = true
+//        navigationHomeView.navigationItem.largeTitleDisplayMode = .always
+        
+//        navigationDrinkView.tabBarItem.image = UIImage(named: "")
+//        navigationDrinkView.tabBarItem.selectedImage = UIImage(named: "")
+        navigationDrinkView.tabBarItem.title = "訂飲料"
+        navigationDrinkView.setNavigationBarHidden(true, animated: true)
+        
+//        navigationShopView.tabBarItem.image = UIImage(named: "")
+//        navigationShopView.tabBarItem.selectedImage = UIImage(named: "")
+        navigationShopView.tabBarItem.title = "商店"
+        
         setViewControllers([navigationHomeView,navigationDrinkView,navigationShopView], animated: true)
+        
         tabBar.backgroundColor = UIColor(named: "MilkGreen")
-        setMiddleButton()
+        tabBar.barTintColor = UIColor(named: "MilkGreen")
+        tabBar.tintColor = .white
+
+        
+//        setMiddleButton()
     }
     
 
@@ -42,8 +62,8 @@ class HomeTabBarController: UITabBarController, UITabBarControllerDelegate{
     @objc func tapPickButton() {
         
         print("Pickup")
-        let viewcontroller = PickUpViewController()
-        present(viewcontroller, animated: true)
+        selectedIndex = 1
+        
     }
     
     func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {

@@ -34,4 +34,5 @@ struct DrinksMenu: Codable {
     let recommend : Bool
     let new : Bool
     let remark : String?
+    let imageurl :String?
 }

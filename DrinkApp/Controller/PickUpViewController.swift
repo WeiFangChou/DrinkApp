@@ -27,8 +27,6 @@ class PickUpViewController: UIViewController {
     
     func updateUI() {
         
-        
-        title = "商店"
         view.backgroundColor = .blue
         
     }
