@@ -26,5 +26,18 @@ class HomeTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        
+        setupUI()
+        
+    }
     
+    func setupUI() {
+        
+        //itemImageView.leadingAnchor.constraint(equalTo: self.leadingAnchor ).isActive = true
+        
+    }
+    
+
 }

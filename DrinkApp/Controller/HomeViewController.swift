@@ -54,7 +54,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         homeTableView.dataSource = self
         
         homeTableView.center = view.center
-        homeTableView.rowHeight = 120
+        homeTableView.rowHeight = 170
         homeTableView.backgroundView = tableViewBackgroundView
         homeTableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
         homeTableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
@@ -78,7 +78,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         cell.itemSub2TitleLabel?.text = "大杯" + String(index.largePrice)
         if let url = index.imageurl{
             
-            cell.itemImageView.fetchImagefromURL(fromURL: url)
+                cell.itemImageView.fetchImagefromURL(fromURL: url)
         }
         cell.backgroundColor = .clear
         return cell
@@ -92,7 +92,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
                 case .failure(let error):
                     print(error)
                 case .success(let drinksmenu):
-                self?.drinksMenus = drinksmenu.sorted{$0.type > $1.type}
+                self?.drinksMenus = drinksmenu.sorted{$0.type < $1.type}
                     DispatchQueue.main.async {
                         self?.homeTableView.reloadData()
                     }

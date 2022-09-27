@@ -12,17 +12,19 @@ import UIKit
 extension UIImageView {
     
     func fetchImagefromURL(fromURL: String) {
-        if let url = URL(string: fromURL){
+        if let url = URL(string: fromURL) {
             URLSession.shared.dataTask(with: url) { data, response, error in
                 if let error = error {
-                    self.image = UIImage(systemName: "photo")
-                    return
+                    self.image = UIImage()
                 }
-                if let data = data {
-                    self.image = UIImage(data: data)
+                if let data = data , let image = UIImage(data: data){
+                    DispatchQueue.main.async {
+                        self.image = image
+                    }
                 }
-            }
+            }.resume()
         }
+        
     }
     
     
