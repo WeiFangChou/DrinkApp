@@ -77,14 +77,13 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         cell.itemSubTitleLabel?.text = index.midPrice == nil ? "" : "中杯：" + String(index.midPrice!)
         cell.itemSub2TitleLabel?.text = "大杯" + String(index.largePrice)
         if let url = index.imageurl{
-            
-                cell.itemImageView.fetchImagefromURL(fromURL: url)
+            DispatchQueue.main.async {
+                cell.itemImageView.fetchImagefromURL(key: index.id.uuidString, fromURL: url)
+            }
         }
-        cell.backgroundColor = .clear
         return cell
         
     }
-    
     func fetchMenuData(){
         print("FetchData")
         APICaller.shared.getMenu{[weak self] result in

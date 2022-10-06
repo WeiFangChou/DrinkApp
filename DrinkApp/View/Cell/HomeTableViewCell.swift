@@ -11,9 +11,16 @@ class HomeTableViewCell: UITableViewCell {
 
     @IBOutlet weak var itemImageView: UIImageView!
     @IBOutlet weak var itemTitleLabel: UILabel!
-    
     @IBOutlet weak var itemSubTitleLabel: UILabel!
     @IBOutlet weak var itemSub2TitleLabel: UILabel!
+    
+    @IBOutlet weak var hotImageView: UIImageView!
+    @IBOutlet weak var coldImageView: UIImageView!
+    @IBOutlet weak var caffeineImageView: UIImageView!
+    
+    @IBOutlet weak var recommendImageView: UIImageView!
+    
+    @IBOutlet weak var newImageView: UIImageView!
     
     
     override func awakeFromNib() {
@@ -34,8 +41,13 @@ class HomeTableViewCell: UITableViewCell {
     }
     
     func setupUI() {
+        backgroundView = UIImageView(image: UIImage(named: "grass"))
+        layer.cornerRadius = 20
+        layer.masksToBounds = true
+        backgroundColor = .SkyBlue
+        itemImageView?.contentMode = .scaleAspectFit
         
-        //itemImageView.leadingAnchor.constraint(equalTo: self.leadingAnchor ).isActive = true
+        
         
     }
     

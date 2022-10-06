@@ -10,13 +10,13 @@ import Foundation
 
 class APICaller {
     
-    var menuBaseURL = "http://127.0.0.1:8080/get/milkshamenu"
-    
+    static var menuBaseURL = "http://api.fangs.dev/get/milkshamenu"
     static let shared = APICaller()
     
+    
+    
     func getMenu(complection: @escaping(Result<[DrinksMenu] ,Error>) -> ()) {
-        print(menuBaseURL)
-        if let url = URL(string: menuBaseURL) {
+        if let url = URL(string: APICaller.menuBaseURL) {
             
             URLSession.shared.dataTask(with: url) { data, response, error in
                 if let error = error {

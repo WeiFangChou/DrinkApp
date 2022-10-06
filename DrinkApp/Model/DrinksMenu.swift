@@ -23,7 +23,7 @@ import Foundation
  */
 
 struct DrinksMenu: Codable {
-    let id: UUID?
+    let id: UUID
     let name : String
     let type : String
     let midPrice: Int?
