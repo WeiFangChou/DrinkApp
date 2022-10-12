@@ -45,8 +45,6 @@ class HomeTableViewCell: UITableViewCell {
         layer.cornerRadius = 20
         layer.masksToBounds = true
         backgroundColor = .SkyBlue
-        itemImageView?.contentMode = .scaleAspectFit
-        
         
         
     }

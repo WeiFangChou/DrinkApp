@@ -9,13 +9,17 @@
 /* Begin PBXBuildFile section */
 		1534EB5F28C6429100BBE7D0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1534EB5E28C6429100BBE7D0 /* AppDelegate.swift */; };
 		1534EB6128C6429100BBE7D0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1534EB6028C6429100BBE7D0 /* SceneDelegate.swift */; };
-		1534EB6628C6429100BBE7D0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1534EB6428C6429100BBE7D0 /* Main.storyboard */; };
 		1534EB6828C6429200BBE7D0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1534EB6728C6429200BBE7D0 /* Assets.xcassets */; };
 		1534EB6B28C6429200BBE7D0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1534EB6928C6429200BBE7D0 /* LaunchScreen.storyboard */; };
 		1555D3C128DB7B8900650C1C /* CustomBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1555D3C028DB7B8900650C1C /* CustomBarItem.swift */; };
 		1555D3C328DB7FAC00650C1C /* ShopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1555D3C228DB7FAC00650C1C /* ShopViewController.swift */; };
 		1555D3C628E02DD200650C1C /* HomeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1555D3C428E02DD200650C1C /* HomeTableViewCell.swift */; };
 		1555D3C728E02DD200650C1C /* HomeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1555D3C528E02DD200650C1C /* HomeTableViewCell.xib */; };
+		1587A83F28F2B5E00086B564 /* ShopTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1587A83D28F2B5E00086B564 /* ShopTableViewCell.swift */; };
+		1587A84028F2B5E00086B564 /* ShopTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1587A83E28F2B5E00086B564 /* ShopTableViewCell.xib */; };
+		1587A84528F599110086B564 /* ShopCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1587A84328F599110086B564 /* ShopCollectionViewCell.swift */; };
+		1587A84628F599110086B564 /* ShopCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1587A84428F599110086B564 /* ShopCollectionViewCell.xib */; };
+		1587A84828F6EF550086B564 /* Shop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1587A84728F6EF550086B564 /* Shop.swift */; };
 		15968D2A28E0332C00E28278 /* APICaller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15968D2928E0332C00E28278 /* APICaller.swift */; };
 		15968D2C28E0335200E28278 /* DrinksMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15968D2B28E0335200E28278 /* DrinksMenu.swift */; };
 		15F6420A28E0537400A9A545 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15F6420928E0537400A9A545 /* Extension.swift */; };
@@ -30,7 +34,6 @@
 		1534EB5B28C6429100BBE7D0 /* DrinkApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DrinkApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1534EB5E28C6429100BBE7D0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1534EB6028C6429100BBE7D0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		1534EB6528C6429100BBE7D0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		1534EB6728C6429200BBE7D0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1534EB6A28C6429200BBE7D0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1534EB6C28C6429200BBE7D0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -38,6 +41,11 @@
 		1555D3C228DB7FAC00650C1C /* ShopViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopViewController.swift; sourceTree = "<group>"; };
 		1555D3C428E02DD200650C1C /* HomeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTableViewCell.swift; sourceTree = "<group>"; };
 		1555D3C528E02DD200650C1C /* HomeTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeTableViewCell.xib; sourceTree = "<group>"; };
+		1587A83D28F2B5E00086B564 /* ShopTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopTableViewCell.swift; sourceTree = "<group>"; };
+		1587A83E28F2B5E00086B564 /* ShopTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ShopTableViewCell.xib; sourceTree = "<group>"; };
+		1587A84328F599110086B564 /* ShopCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopCollectionViewCell.swift; sourceTree = "<group>"; };
+		1587A84428F599110086B564 /* ShopCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ShopCollectionViewCell.xib; sourceTree = "<group>"; };
+		1587A84728F6EF550086B564 /* Shop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shop.swift; sourceTree = "<group>"; };
 		15968D2928E0332C00E28278 /* APICaller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APICaller.swift; sourceTree = "<group>"; };
 		15968D2B28E0335200E28278 /* DrinksMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinksMenu.swift; sourceTree = "<group>"; };
 		15F6420928E0537400A9A545 /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
@@ -95,6 +103,7 @@
 			isa = PBXGroup;
 			children = (
 				15968D2B28E0335200E28278 /* DrinksMenu.swift */,
+				1587A84728F6EF550086B564 /* Shop.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -150,8 +159,9 @@
 			isa = PBXGroup;
 			children = (
 				1534EB6928C6429200BBE7D0 /* LaunchScreen.storyboard */,
-				1534EB6428C6429100BBE7D0 /* Main.storyboard */,
 				1555D3C528E02DD200650C1C /* HomeTableViewCell.xib */,
+				1587A83E28F2B5E00086B564 /* ShopTableViewCell.xib */,
+				1587A84428F599110086B564 /* ShopCollectionViewCell.xib */,
 			);
 			path = Storyboard;
 			sourceTree = "<group>";
@@ -160,6 +170,8 @@
 			isa = PBXGroup;
 			children = (
 				1555D3C428E02DD200650C1C /* HomeTableViewCell.swift */,
+				1587A84328F599110086B564 /* ShopCollectionViewCell.swift */,
+				1587A83D28F2B5E00086B564 /* ShopTableViewCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -230,10 +242,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1587A84628F599110086B564 /* ShopCollectionViewCell.xib in Resources */,
 				1534EB6B28C6429200BBE7D0 /* LaunchScreen.storyboard in Resources */,
 				1534EB6828C6429200BBE7D0 /* Assets.xcassets in Resources */,
 				1555D3C728E02DD200650C1C /* HomeTableViewCell.xib in Resources */,
-				1534EB6628C6429100BBE7D0 /* Main.storyboard in Resources */,
+				1587A84028F2B5E00086B564 /* ShopTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -249,28 +262,23 @@
 				15FAA07028DB781C009D77D1 /* CustomTabBarController.swift in Sources */,
 				15968D2C28E0335200E28278 /* DrinksMenu.swift in Sources */,
 				15FAA06E28DB7799009D77D1 /* HomeTabBarController.swift in Sources */,
+				1587A83F28F2B5E00086B564 /* ShopTableViewCell.swift in Sources */,
 				1555D3C628E02DD200650C1C /* HomeTableViewCell.swift in Sources */,
 				1555D3C128DB7B8900650C1C /* CustomBarItem.swift in Sources */,
 				15FAA06C28DB748D009D77D1 /* PickUpViewController.swift in Sources */,
 				1534EB6128C6429100BBE7D0 /* SceneDelegate.swift in Sources */,
 				15F6420A28E0537400A9A545 /* Extension.swift in Sources */,
 				15968D2A28E0332C00E28278 /* APICaller.swift in Sources */,
+				1587A84528F599110086B564 /* ShopCollectionViewCell.swift in Sources */,
 				15FAA06828DB73EF009D77D1 /* HomeNavigationController.swift in Sources */,
 				15FAA06A28DB7445009D77D1 /* HomeViewController.swift in Sources */,
+				1587A84828F6EF550086B564 /* Shop.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		1534EB6428C6429100BBE7D0 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				1534EB6528C6429100BBE7D0 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		1534EB6928C6429200BBE7D0 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -401,16 +409,19 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = BAFS86PG22;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = DrinkApp/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Drinks;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
+				INFOPLIST_KEY_UIRequiresFullScreen = NO;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -429,16 +440,19 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = BAFS86PG22;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = DrinkApp/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Drinks;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
+				INFOPLIST_KEY_UIRequiresFullScreen = NO;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

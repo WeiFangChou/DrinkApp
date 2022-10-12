@@ -16,7 +16,7 @@ class HomeTabBarController: UITabBarController, UITabBarControllerDelegate{
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
     }
 
@@ -42,27 +42,26 @@ class HomeTabBarController: UITabBarController, UITabBarControllerDelegate{
 //        navigationShopView.tabBarItem.selectedImage = UIImage(named: "")
         navigationShopView.tabBarItem.title = "商店"
         
-        setViewControllers([navigationHomeView,navigationDrinkView,navigationShopView], animated: true)
-        
+        setViewControllers([navigationShopView], animated: true)
+       
         tabBar.backgroundColor = UIColor(named: "MilkGreen")
         tabBar.barTintColor = UIColor(named: "MilkGreen")
         tabBar.tintColor = .white
-
         
-//        setMiddleButton()
+        view.backgroundColor = .SkyBlue
     }
     
 
     
     func settingTabbarItem() {
-        let image = UIImage(named: "shop")
+//        let image = UIImage(named: "shop")
 
     }
     
     @objc func tapPickButton() {
         
         print("Pickup")
-        selectedIndex = 1
+        
         
     }
     
