@@ -11,7 +11,7 @@ class ShopCollectionViewCell: UICollectionViewCell {
 
     @IBOutlet weak var regionLabel: UILabel! {
         didSet{
-            self.backgroundColor = .MilkGreen
+            
             self.layer.masksToBounds = true
             self.layer.cornerRadius = 10
         }

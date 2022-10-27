@@ -9,7 +9,7 @@ import UIKit
 
 class HomeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
-    var drinksMenus = [DrinksMenu]()
+    var drinksMenus = [Menu]()
     
     
     lazy var homeTableView : UITableView = {

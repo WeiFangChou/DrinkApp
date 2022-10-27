@@ -9,9 +9,10 @@ import UIKit
 
 class HomeTabBarController: UITabBarController, UITabBarControllerDelegate{
     
-    var homeViewController = HomeViewController()
-    var drinkViewController = PickUpViewController()
-    var shopViewController = ShopViewController()
+    let homeViewController = HomeViewController()
+    let drinkViewController = PickUpViewController()
+    let shopViewController = ShopViewController()
+    let historyViewController = HistoryViewController()
     var homeBarItem = CustomBarItem(title: "Home", image: "shop")
 
     override func viewDidLoad() {
@@ -26,23 +27,27 @@ class HomeTabBarController: UITabBarController, UITabBarControllerDelegate{
         let navigationHomeView = UINavigationController(rootViewController: homeViewController)
         let navigationDrinkView = UINavigationController(rootViewController: drinkViewController)
         let navigationShopView = UINavigationController(rootViewController: shopViewController)
-        
-        
+        let navigationHistoryView = UINavigationController(rootViewController: historyViewController)
+        historyViewController.delegate = drinkViewController
         navigationHomeView.navigationBar.barTintColor = UIColor(named: "MilkGreen")
         navigationHomeView.tabBarItem.title = "菜單"
         navigationHomeView.hidesBarsOnSwipe = true
 //        navigationHomeView.navigationItem.largeTitleDisplayMode = .always
         
-//        navigationDrinkView.tabBarItem.image = UIImage(named: "")
-//        navigationDrinkView.tabBarItem.selectedImage = UIImage(named: "")
+        navigationDrinkView.tabBarItem.image = UIImage(named: "")
+        navigationDrinkView.tabBarItem.selectedImage = UIImage(named: "")
         navigationDrinkView.tabBarItem.title = "訂飲料"
         navigationDrinkView.setNavigationBarHidden(true, animated: true)
         
-//        navigationShopView.tabBarItem.image = UIImage(named: "")
-//        navigationShopView.tabBarItem.selectedImage = UIImage(named: "")
+        navigationShopView.tabBarItem.image = UIImage(named: "")
+        navigationShopView.tabBarItem.selectedImage = UIImage(named: "")
         navigationShopView.tabBarItem.title = "商店"
         
-        setViewControllers([navigationShopView], animated: true)
+        navigationHistoryView.tabBarItem.image = UIImage(named: "")
+        navigationHistoryView.tabBarItem.selectedImage = UIImage(named: "")
+        navigationHistoryView.tabBarItem.title = "歷史訂單"
+        
+        setViewControllers([navigationHomeView, navigationShopView, navigationDrinkView , navigationHistoryView], animated: true)
        
         tabBar.backgroundColor = UIColor(named: "MilkGreen")
         tabBar.barTintColor = UIColor(named: "MilkGreen")

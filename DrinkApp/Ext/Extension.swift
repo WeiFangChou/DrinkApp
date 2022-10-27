@@ -73,3 +73,25 @@ extension UIColor {
     static let MilkGreen = UIColor(red:  77/254, green: 126/254, blue: 35/254, alpha: 1)
     static let SkyBlue = UIColor(red: 135/254, green: 206/254, blue: 235/254, alpha: 1)
 }
+
+extension UIViewController {
+    
+    func showAlertView(title: String?, message: String,compection: @escaping(AlertError)-> ()) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let alertAction = UIAlertAction(title: "OK", style: .default) { action in
+            compection(.OKAction)
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { cancelAction in
+            compection(.CancelAction)
+        }
+        alertController.addAction(alertAction)
+        alertController.addAction(cancelAction)
+        present(alertController, animated: true)
+    }
+    
+}
+
+enum AlertError: Error {
+    case OKAction
+    case CancelAction
+}

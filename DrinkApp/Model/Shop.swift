@@ -14,7 +14,7 @@ struct Shop:Codable {
     var shopLatitude: Double
     var shopLongitude: Double
     var shopCity: String
-    var shopCountry: String
+    var shopRegion: String
     var shopBusiness: [Business]
     
 }

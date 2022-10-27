@@ -16,12 +16,20 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
+        let userDefaults = UserDefaults.standard
+        let deviceUUID = UIDevice.current.identifierForVendor?.uuidString
+        if let uuid = userDefaults.string(forKey: "deviceUUID") {
+            
+        }else{
+            userDefaults.set(deviceUUID, forKey: "deviceUUID")
+        }
+        
         window = UIWindow(frame: windowScene.coordinateSpace.bounds)
-        window?.windowScene = windowScene
-        window?.makeKeyAndVisible()
         let homeTabBarController = HomeTabBarController()
         window?.rootViewController = homeTabBarController
-       
+        window?.windowScene = windowScene
+        window?.makeKeyAndVisible()
+        
         
     }
 

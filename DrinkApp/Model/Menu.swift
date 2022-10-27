@@ -22,7 +22,7 @@ import Foundation
  "new":false,
  */
 
-struct DrinksMenu: Codable {
+struct Menu: Codable {
     let id: UUID
     let name : String
     let type : String
