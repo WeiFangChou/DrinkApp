@@ -7,53 +7,83 @@
 
 import UIKit
 
+
+protocol OrderViewControllerDelegate {
+    func updateShopBag(order: Order)
+}
+
 class OrderViewController: UIViewController {
+    
+    var delegate: OrderViewControllerDelegate?
     
     var order : Order? {
         didSet{
             if let order = order, let count = order.drinks?.count{
                 if count > 0 {
                     orderInfoLabel.text = "\(count)"
-                    shoppingBagButton.setTitle("檢視購物車(\(count))", for: .normal)
+                    shoppingBagButton.setTitle("檢視購物車 (\(count))", for: .normal)
                     shoppingBagButton.isHidden = false
                 }
             }
         }
     }
     var menus : [Menu] = []
+    var dicMenus = Dictionary<String, Array<Menu>>()
+    var sections: [String] = []
+    
+    lazy var stackView: UIStackView = {
+        let view = UIStackView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: view.bounds.height))
+        view.axis = .vertical
+        view.center = self.view.center
+        view.distribution = .fill
+        view.alignment = .fill
+        view.spacing = 0
+        view.addArrangedSubview(orderInfoView)
+        view.addArrangedSubview(orderTableView)
+        view.addArrangedSubview(shoppingBagButton)
+        return view
+    }()
     
     lazy var orderInfoView : UIView = {
-        let view = UIView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: 80))
+        let view = UIView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: 50))
         view.backgroundColor = .white
+        view.heightAnchor.constraint(equalToConstant: 50).isActive = true
         view.addSubview(orderInfoLabel)
+        
         return view
     }()
     
     lazy var orderInfoLabel : UILabel = {
-       let label = UILabel(frame: CGRect(x: 0, y: 0, width: 250, height: 40))
-        
+        let label = UILabel(frame: CGRect(x: 0, y: 5, width: 100, height: 20))
+        label.contentMode = .center
         label.text = ""
         label.textColor = .label
+        label.numberOfLines = 1
+        label.font = .systemFont(ofSize: 25)
         return label
     }()
     
     lazy var orderTableView: UITableView = {
-        let tableView = UITableView(frame: CGRect(x: orderInfoView.bounds.minX, y: orderInfoView.bounds.maxY + 10,
-                                                  width: view.bounds.width, height: view.bounds.height - 250), style: .insetGrouped)
+        let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: view.bounds.height ), style: .insetGrouped)
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(UINib(nibName: "OrderTableViewCell", bundle: nil), forCellReuseIdentifier: OrderTableViewCell.Identifier)
         tableView.backgroundColor = .clear
+        
         return tableView
     }()
     
     lazy var shoppingBagButton : UIButton = {
-        let button = UIButton(frame: CGRect(x: 25, y: view.bounds.height - 150, width: view.bounds.width - 50, height: 50))
+        let button = UIButton(frame: CGRect(x: 0, y: 0, width: 200, height: 70))
         button.setTitle("檢視購物車", for: .normal)
         button.backgroundColor = .black
         button.addTarget(self, action: #selector(shoppingBagButtonTapped), for: .touchUpInside)
         button.isUserInteractionEnabled = true
         button.isHidden = true
+        button.heightAnchor.constraint(equalToConstant: 65).isActive = true
+        button.widthAnchor.constraint(equalToConstant: 150).isActive = true
+        button.layer.cornerRadius = 30
+        button.layer.masksToBounds = true
         return button
     }()
     
@@ -103,33 +133,11 @@ class OrderViewController: UIViewController {
     func setupUI(){
         fetchMenu()
         view.backgroundColor = .MilkGreen
-        view.addSubview(orderTableView)
-        view.addSubview(shoppingBagButton)
-        view.addSubview(orderInfoView)
+        view.addSubview(stackView)
         self.isModalInPresentation = true
-        
-        orderInfoView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-        orderInfoView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
-        orderInfoView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
-        
-        orderTableView.topAnchor.constraint(equalTo: orderInfoView.bottomAnchor).isActive = true
-        orderTableView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
-        orderTableView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
-        orderTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
-        
-        shoppingBagButton.topAnchor.constraint(equalTo: orderTableView.bottomAnchor).isActive = true
-        shoppingBagButton.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
-        shoppingBagButton.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
-        shoppingBagButton.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
-        
         presentationController?.delegate = self
-        
-        Timer.scheduledTimer(withTimeInterval: 5, repeats: true) { timer in
-            print("Timer")
-            let drink = Drinks(id: UUID(), name: "TEST", size: "大杯", cost: 50, ice: 4, sweet: 4)
-            self.order?.addDrink(drink: drink)
-            print(self.order?.drinks?.count)
-        }
+        shoppingBagButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -35).isActive = true
+        shoppingBagButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
     }
     
     @objc func cancelButtonTap(sender: UIButton) {
@@ -145,6 +153,8 @@ class OrderViewController: UIViewController {
                 return
             case .success(let menus):
                 self.menus = menus.sorted{$0.type < $1.type}
+                self.dicMenus = Dictionary(grouping: self.menus, by: { $0.type })
+                self.sections = self.dicMenus.keys.sorted()
                 DispatchQueue.main.async {
                     self.orderTableView.reloadData()
                 }
@@ -154,7 +164,10 @@ class OrderViewController: UIViewController {
     }
     
     @objc func shoppingBagButtonTapped() {
-        
+        if let order = order {
+            let shopbagViewController = ShopBagViewController(order: order)
+            present(shopbagViewController, animated: true)
+        }
     }
     
     
@@ -164,19 +177,28 @@ class OrderViewController: UIViewController {
 
 extension OrderViewController: UITableViewDelegate, UITableViewDataSource {
     
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return sections.count
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return sections[section]
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return menus.count
+        return self.dicMenus[sections[section]]!.count
     }
-
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: OrderTableViewCell.Identifier, for: indexPath) as? OrderTableViewCell else {
             return UITableViewCell()
         }
-        let index = menus[indexPath.row]
-        
-        cell.selectImageView.load(from: index.imageurl)
-        cell.selectLabel.text = index.name
+        if let rows = self.dicMenus[sections[indexPath.section]] {
+            let row = rows[indexPath.row]
+            cell.selectImageView.load(from: row.imageurl)
+            cell.selectLabel.text = row.name
+        }
         return cell
     }
     
@@ -194,12 +216,15 @@ extension OrderViewController: UITableViewDelegate, UITableViewDataSource {
         let drinkInfoViewController = DrinkInfoViewController(drink: drink)
         drinkInfoViewController.delegate = self
         present(drinkInfoViewController, animated: true)
+        
     }
-
     
-    
-    
-    
+    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        if let headerView = view as? UITableViewHeaderFooterView {
+            headerView.textLabel?.font = UIFont(name: "Arial-BoldMT", size: 25)
+            headerView.textLabel?.textColor = .white
+        }
+    }
 }
 
 
@@ -218,8 +243,8 @@ extension OrderViewController: UIAdaptivePresentationControllerDelegate {
 }
 
 extension OrderViewController: DrinkInfoViewControllerDelegate {
-    func drinkInfoChanged() {
-        
+    func drinkInfoChanged(drink: Drinks) {
+        self.order?.addDrink(drink: drink)
     }
     
     

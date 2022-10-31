@@ -25,6 +25,7 @@
 		1575D2FF2902582900A8423F /* City.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1575D2FE2902582900A8423F /* City.swift */; };
 		1575D30229068CBC00A8423F /* OrderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1575D30029068CBC00A8423F /* OrderTableViewCell.swift */; };
 		1575D30329068CBC00A8423F /* OrderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1575D30129068CBC00A8423F /* OrderTableViewCell.xib */; };
+		1578CDF4290D1FAA0064CFC8 /* ShopBagViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1578CDF3290D1FAA0064CFC8 /* ShopBagViewController.swift */; };
 		1587A83F28F2B5E00086B564 /* ShopTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1587A83D28F2B5E00086B564 /* ShopTableViewCell.swift */; };
 		1587A84028F2B5E00086B564 /* ShopTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1587A83E28F2B5E00086B564 /* ShopTableViewCell.xib */; };
 		1587A84528F599110086B564 /* ShopCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1587A84328F599110086B564 /* ShopCollectionViewCell.swift */; };
@@ -64,6 +65,7 @@
 		1575D2FE2902582900A8423F /* City.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = City.swift; sourceTree = "<group>"; };
 		1575D30029068CBC00A8423F /* OrderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderTableViewCell.swift; sourceTree = "<group>"; };
 		1575D30129068CBC00A8423F /* OrderTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OrderTableViewCell.xib; sourceTree = "<group>"; };
+		1578CDF3290D1FAA0064CFC8 /* ShopBagViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopBagViewController.swift; sourceTree = "<group>"; };
 		1587A83D28F2B5E00086B564 /* ShopTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopTableViewCell.swift; sourceTree = "<group>"; };
 		1587A83E28F2B5E00086B564 /* ShopTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ShopTableViewCell.xib; sourceTree = "<group>"; };
 		1587A84328F599110086B564 /* ShopCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -155,8 +157,9 @@
 				1555D3C228DB7FAC00650C1C /* ShopViewController.swift */,
 				15FAA06B28DB748D009D77D1 /* PickUpViewController.swift */,
 				15492E2A28FD78300016C337 /* OrderViewController.swift */,
-				15492E2028FBEC740016C337 /* HistoryViewController.swift */,
+				1578CDF3290D1FAA0064CFC8 /* ShopBagViewController.swift */,
 				15B8F9492908368B00E7F3F8 /* DrinkInfoViewController.swift */,
+				15492E2028FBEC740016C337 /* HistoryViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -311,6 +314,7 @@
 				1587A83F28F2B5E00086B564 /* ShopTableViewCell.swift in Sources */,
 				1575D30229068CBC00A8423F /* OrderTableViewCell.swift in Sources */,
 				1555D3C628E02DD200650C1C /* HomeTableViewCell.swift in Sources */,
+				1578CDF4290D1FAA0064CFC8 /* ShopBagViewController.swift in Sources */,
 				15492E2628FBEE530016C337 /* PickupTableViewCell.swift in Sources */,
 				15492E3028FD87790016C337 /* HistoryTableViewCell.swift in Sources */,
 				1555D3C128DB7B8900650C1C /* CustomBarItem.swift in Sources */,

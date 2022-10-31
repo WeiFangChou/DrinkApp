@@ -26,7 +26,6 @@ class HistoryTableViewCell: UITableViewCell {
     
     @IBAction func orderReOrderButtonTap(_ sender: AnyObject) {
         delegate?.reOrderButtonTap(cell: self)
-        
     }
     
     

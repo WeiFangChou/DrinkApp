@@ -23,14 +23,14 @@ class HistoryViewController: UIViewController, HistoryTableViewCellDelegate{
         let view = UIView(frame: CGRect(x: 0, y: 0, width: 200, height: 200))
         let label = UILabel(frame: CGRect(x: 0, y: 0, width: 180, height: 180))
         view.addSubview(label)
+        view.center = self.view.center
         label.text = "Your don't have any History Order !"
-        
         return view
     }()
     
     lazy var historyTableView : UITableView = {
         let tableview = UITableView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: view.bounds.height))
-        
+        tableview.backgroundColor = .MilkGreen
         tableview.register(UINib(nibName: "HistoryTableViewCell", bundle: nil), forCellReuseIdentifier: HistoryTableViewCell.Identifier)
         tableview.delegate = self
         tableview.dataSource = self
@@ -75,20 +75,19 @@ class HistoryViewController: UIViewController, HistoryTableViewCellDelegate{
         
         let userDefaults = UserDefaults.standard
         if let uuidString = userDefaults.string(forKey: "deviceUUID") {
-            APICaller.shared.getOrders(orderUUID: uuidString) { [weak self] reuslt in
+            APICaller.shared.getOrders(orderUUID: uuidString) { reuslt in
                 switch reuslt {
                 case .success(let success):
                     DispatchQueue.main.async {
-                        print(success.first)
-                        self?.orders = success
-                        self?.historyTableView.reloadData()
-                        self?.noDataView.isHidden = true
-                        self?.refreshControl.endRefreshing()
+                        self.orders = success
+                        self.historyTableView.reloadData()
+                        self.noDataView.isHidden = true
+                        self.refreshControl.endRefreshing()
                     }
                     
                 case .failure(let failure):
                     print(failure)
-                    
+                    self.noDataView.isHidden = false
                 }
             }
         }
@@ -146,9 +145,7 @@ extension HistoryViewController: UITableViewDelegate, UITableViewDataSource{
         let newDate = dateFormatter.date(from: index.createdate)
         dateFormatter.dateFormat = "MM月dd日"
         let formattedDate = dateFormatter.string(from: newDate!)
-        print(formattedDate)
         cell.orderDrinkstrdTitleLabel.text = "\(formattedDate)・已完成"
-    
         return cell
     }
     

@@ -21,22 +21,12 @@ class PickUpViewController: UIViewController, HistoryViewControllerDelegate {
     }()
     lazy var pickupTableView : UITableView = {
        
-        let table = UITableView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: view.bounds.height))
+        let table = UITableView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: view.bounds.height),style: .insetGrouped)
         table.delegate = self
         table.dataSource = self
-        table.backgroundColor = .clear
+        table.backgroundColor = .MilkGreen
         table.register(UINib(nibName: "PickupTableViewCell", bundle: nil), forCellReuseIdentifier: PickupTableViewCell.Identifier)
         return table
-    }()
-    
-    lazy var orderButton : UIButton = {
-       let button = UIButton()
-        button.setTitle("開始點飲料", for: .normal)
-        button.setTitleColor(.MilkGreen, for: .normal)
-        button.setTitleColor(.red, for: .highlighted)
-        button.backgroundColor = .lightGray
-        button.addTarget(self, action: #selector(orderButtonTap), for: .touchUpInside)
-      return button
     }()
     
     var order:Order?
@@ -81,11 +71,9 @@ class PickUpViewController: UIViewController, HistoryViewControllerDelegate {
     
     func setupUI() {
         view.addSubview(pickerView)
-        view.addSubview(orderButton)
         view.addSubview(pickupTableView)
-        pickupTableView.frame = CGRect(x: 0, y: 0 + 300, width: view.bounds.width, height: view.bounds.height - 450)
+        pickupTableView.frame = CGRect(x: 0, y: 0 + 300, width: view.bounds.width, height: view.bounds.height - 300)
         pickerView.frame = CGRect(x: 0, y: 100, width: view.bounds.width, height: 150)
-        orderButton.frame = CGRect(x: 0 + ((view.bounds.width / 2 ) / 2) , y: view.bounds.height - 150, width: view.bounds.width / 2, height: 30)
         currentShops = shops
         
     }
@@ -100,10 +88,8 @@ class PickUpViewController: UIViewController, HistoryViewControllerDelegate {
                 break
             case .success(let order):
                 DispatchQueue.main.async {
-                    
                     let orderViewController = OrderViewController(order: order)
-                    
-                    self.navigationController?.present(orderViewController, animated: true)
+                    self.present(orderViewController, animated: true)
                 }
                 break
             }

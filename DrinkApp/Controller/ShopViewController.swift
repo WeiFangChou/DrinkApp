@@ -27,6 +27,7 @@ class ShopViewController: UIViewController {
         tableView.bounds = view.bounds
         tableView.register(UINib(nibName: "ShopTableViewCell", bundle: nil), forCellReuseIdentifier: "ShopTableViewCell")
         tableView.showsVerticalScrollIndicator = false
+        tableView.backgroundColor = .MilkGreen
         return tableView
     }()
 
@@ -41,6 +42,7 @@ class ShopViewController: UIViewController {
         let collectionView = UICollectionView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: 40), collectionViewLayout: flowLayout)
         collectionView.register(UINib(nibName: "ShopCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "ShopCollectionViewCell")
         collectionView.showsHorizontalScrollIndicator = false
+        collectionView.backgroundColor = .clear
         return collectionView
     }()
 
@@ -87,6 +89,7 @@ extension ShopViewController: UITableViewDelegate, UITableViewDataSource {
         
         let index = currentShops[indexPath.row]
         let locationCoordinate = CLLocationCoordinate2D(latitude: index.shopLatitude, longitude: index.shopLongitude)
+        cell.backgroundColor = .clear
         cell.shopLabel.text = index.shopName
         cell.addressLabel.text = index.shopAddress
         let pointAnnotation = MKPointAnnotation()
@@ -96,6 +99,8 @@ extension ShopViewController: UITableViewDelegate, UITableViewDataSource {
         let local = MKCoordinateRegion(center: locationCoordinate, latitudinalMeters: 500, longitudinalMeters: 500)
         cell.shopMapView.setRegion(local, animated: true)
         cell.shopMapView.addAnnotation(pointAnnotation)
+        cell.shopMapView.layer.cornerRadius = 15
+        cell.shopMapView.layer.masksToBounds = true
         return cell
     }
     
@@ -138,6 +143,8 @@ extension ShopViewController: UICollectionViewDelegate,UICollectionViewDataSourc
         
         cell.backgroundColor = cell.isSelected ? .red : .MilkGreen
         cell.regionLabel.text = index
+        cell.layer.borderColor = UIColor.black.cgColor
+        cell.layer.borderWidth = 3
         return cell
         
     }

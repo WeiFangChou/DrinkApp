@@ -29,37 +29,38 @@ class HomeTabBarController: UITabBarController, UITabBarControllerDelegate{
         let navigationShopView = UINavigationController(rootViewController: shopViewController)
         let navigationHistoryView = UINavigationController(rootViewController: historyViewController)
         historyViewController.delegate = drinkViewController
-        navigationHomeView.navigationBar.barTintColor = UIColor(named: "MilkGreen")
+        navigationHomeView.navigationBar.barTintColor = .MilkGreen
         navigationHomeView.tabBarItem.title = "菜單"
-        navigationHomeView.hidesBarsOnSwipe = true
-//        navigationHomeView.navigationItem.largeTitleDisplayMode = .always
+        
         
         navigationDrinkView.tabBarItem.image = UIImage(named: "")
         navigationDrinkView.tabBarItem.selectedImage = UIImage(named: "")
         navigationDrinkView.tabBarItem.title = "訂飲料"
+        navigationDrinkView.navigationBar.barTintColor = .MilkGreen
         navigationDrinkView.setNavigationBarHidden(true, animated: true)
         
         navigationShopView.tabBarItem.image = UIImage(named: "")
         navigationShopView.tabBarItem.selectedImage = UIImage(named: "")
+        navigationShopView.navigationBar.barTintColor = .MilkGreen
         navigationShopView.tabBarItem.title = "商店"
         
         navigationHistoryView.tabBarItem.image = UIImage(named: "")
         navigationHistoryView.tabBarItem.selectedImage = UIImage(named: "")
+        navigationHistoryView.navigationBar.barTintColor = .MilkGreen
         navigationHistoryView.tabBarItem.title = "歷史訂單"
         
         setViewControllers([navigationHomeView, navigationShopView, navigationDrinkView , navigationHistoryView], animated: true)
        
-        tabBar.backgroundColor = UIColor(named: "MilkGreen")
-        tabBar.barTintColor = UIColor(named: "MilkGreen")
-        tabBar.tintColor = .white
+//        tabBar.backgroundColor = UIColor(named: "MilkGreen")
+        view.backgroundColor = .MilkGreen
+        tabBar.tintColor = .MilkGreen
+//        tabBar.unselectedItemTintColor = .gray
         
-        view.backgroundColor = .SkyBlue
     }
     
 
     
     func settingTabbarItem() {
-//        let image = UIImage(named: "shop")
 
     }
     
@@ -73,22 +74,6 @@ class HomeTabBarController: UITabBarController, UITabBarControllerDelegate{
     func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
         
     }
-    
-    
-    func setMiddleButton() {
-        let button = UIButton(frame: CGRect(x: (self.view.bounds.width/2) - 30, y: -20, width: 60, height: 60))
-        
-        button.setImage(UIImage(named: "shop_white"), for: .normal)
-        button.setBackgroundImage(UIImage(named: "CustomBarItemColor"), for: .normal)
-        button.layer.borderWidth = 2
-        button.layer.borderColor = UIColor(named: "MilkGreen")?.cgColor
-        button.layer.cornerRadius = 30
-        button.layer.shadowRadius = 15
-        button.layer.shadowColor = UIColor(named: "MilkGreen")?.cgColor
-        button.layer.shadowOffset = CGSize(width: 4, height: 4)
-        self.tabBar.addSubview(button)
-        button.addTarget(self, action: #selector(tapPickButton), for: .touchUpInside)
-    }
-    
+
     
 }
