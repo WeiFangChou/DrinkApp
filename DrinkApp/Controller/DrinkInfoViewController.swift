@@ -15,7 +15,7 @@ class DrinkInfoViewController: UIViewController {
     var delegate: DrinkInfoViewControllerDelegate?
     var drink: Drinks
     
-    var sectionsData : [String: Array<String>] = ["尺寸":["中杯","大杯"],
+    var sectionsData : [String: Array<String>] = ["尺寸":["大杯","中杯"],
                                                     "冰塊":["常溫","正常冰","少冰","去冰","微冰"],
                                                     "甜度":["無糖","正常","少糖","半糖","微糖"],
                                                     "其他":["加椰果","加珍珠","加布丁"]]
@@ -24,10 +24,18 @@ class DrinkInfoViewController: UIViewController {
     lazy var headerView : UIView = {
         let view = UIView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: 50))
         view.addSubview(cancelDrinkInfoButton)
+        view.addSubview(titleDrinkInfolabel)
         view.addSubview(saveDrinkInfoButton)
+        titleDrinkInfolabel.center = view.center
         return view
     }()
-    
+    lazy var titleDrinkInfolabel: UILabel = {
+        let label = UILabel(frame: CGRect(x: 0, y: 15, width: 150, height: 25))
+        label.contentMode = .center
+        label.text = ""
+        label.numberOfLines = 1
+        return label
+    }()
     lazy var saveDrinkInfoButton : UIButton = {
         let button = UIButton(frame: CGRect(x: view.bounds.width - 90, y: 15, width: 80, height: 25))
         button.setTitle("Add", for: .normal)
@@ -66,6 +74,7 @@ class DrinkInfoViewController: UIViewController {
     init(drink: Drinks){
         self.drink = drink
         super.init(nibName: nil, bundle: nil)
+        titleDrinkInfolabel.text = drink.name
         
     }
     
@@ -78,7 +87,8 @@ class DrinkInfoViewController: UIViewController {
         view.addSubview(headerView)
         view.addSubview(drinkinfoTableView)
         view.backgroundColor = .MilkGreen
-
+        
+        drinkinfoTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
     }
     
     @objc func saveDrinkInfo() {
@@ -122,7 +132,7 @@ extension DrinkInfoViewController: UITableViewDelegate, UITableViewDataSource {
         }
         
         if let indexSelectedRows = tableView.indexPathsForSelectedRows {
-            for indexSelectedRow in indexSelectedRows {
+            for indexSelectedRow in indexSelectedRows{
                 if let selectedCell = tableView.cellForRow(at: indexSelectedRow) as? DrinkInfoTableViewCell {
                     selectedCell.drinkInfoSelectImageView.image = UIImage(systemName: "moonphase.new.moon")
                 }
@@ -137,15 +147,39 @@ extension DrinkInfoViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let cell = tableView.cellForRow(at: indexPath) as? DrinkInfoTableViewCell {
             cell.drinkInfoSelectImageView.image = UIImage(systemName: "moonphase.new.moon")
+            switch indexPath.section {
+            case 0:
+                drink.size = indexPath.row == 0 ? "大杯" : "中杯"
+            case 1:
+                drink.ice = Ice(rawValue: indexPath.row)!.rawValue
+            case 2:
+                drink.sweet = Ice(rawValue: indexPath.row)!.rawValue
+            case 3:
+                drink.addon?.removeAll()
+                let rowsOfSection = tableView.numberOfRows(inSection: indexPath.section)
+                for selectIndex in 0...rowsOfSection{
+                    if let cell = tableView.cellForRow(at: IndexPath(row: selectIndex, section: indexPath.section)) as? DrinkInfoTableViewCell, let addonName = cell.drinkInfoLabel.text {
+                        if cell.isSelected {
+                            drink.addon?.append(addonName)
+                        }
+                    }
+                }
+            default:
+                return
+            }
+            
+            
         }
+        print(drink)
     }
     
     func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
-        
-        if let selectedIndexPathSection = tableView.indexPathsForSelectedRows?.first(where: { $0.section == indexPath.section}) {
-            if let cell = tableView.cellForRow(at: selectedIndexPathSection) as? DrinkInfoTableViewCell{
-                tableView.deselectRow(at: selectedIndexPathSection, animated: true)
-                cell.drinkInfoSelectImageView.image = UIImage(systemName: "moonphase.new.moon.inverse")
+        if indexPath.section != tableView.numberOfSections - 1{
+            if let selectedIndexPathSection = tableView.indexPathsForSelectedRows?.first(where: { $0.section == indexPath.section}) {
+                if let cell = tableView.cellForRow(at: selectedIndexPathSection) as? DrinkInfoTableViewCell{
+                    tableView.deselectRow(at: selectedIndexPathSection, animated: true)
+                    cell.drinkInfoSelectImageView.image = UIImage(systemName: "moonphase.new.moon.inverse")
+                }
             }
         }
         return indexPath

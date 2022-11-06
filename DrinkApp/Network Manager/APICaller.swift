@@ -81,8 +81,8 @@ class APICaller {
                 request.httpMethod = "PUT"
                 request.setValue("application/json", forHTTPHeaderField: "Content-Type")
                 let content = try? jsonEncoder.encode(order)
+                print(String(data: content!, encoding: .utf8))
                 request.httpBody = content
-                
                 do{
                     URLSession.shared.dataTask(with: request) { data, response, error in
                         do{

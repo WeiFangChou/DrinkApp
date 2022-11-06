@@ -36,6 +36,8 @@
 		15B8F94A2908368B00E7F3F8 /* DrinkInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15B8F9492908368B00E7F3F8 /* DrinkInfoViewController.swift */; };
 		15B8F94D2908394E00E7F3F8 /* DrinkInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15B8F94B2908394E00E7F3F8 /* DrinkInfoTableViewCell.swift */; };
 		15B8F94E2908394E00E7F3F8 /* DrinkInfoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 15B8F94C2908394E00E7F3F8 /* DrinkInfoTableViewCell.xib */; };
+		15D42936291032FE0050BBFE /* ShopBagTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D42934291032FE0050BBFE /* ShopBagTableViewCell.swift */; };
+		15D42937291032FE0050BBFE /* ShopBagTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 15D42935291032FE0050BBFE /* ShopBagTableViewCell.xib */; };
 		15F6420A28E0537400A9A545 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15F6420928E0537400A9A545 /* Extension.swift */; };
 		15FAA06828DB73EF009D77D1 /* HomeNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15FAA06728DB73EF009D77D1 /* HomeNavigationController.swift */; };
 		15FAA06A28DB7445009D77D1 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15FAA06928DB7445009D77D1 /* HomeViewController.swift */; };
@@ -76,6 +78,8 @@
 		15B8F9492908368B00E7F3F8 /* DrinkInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkInfoViewController.swift; sourceTree = "<group>"; };
 		15B8F94B2908394E00E7F3F8 /* DrinkInfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkInfoTableViewCell.swift; sourceTree = "<group>"; };
 		15B8F94C2908394E00E7F3F8 /* DrinkInfoTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DrinkInfoTableViewCell.xib; sourceTree = "<group>"; };
+		15D42934291032FE0050BBFE /* ShopBagTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopBagTableViewCell.swift; sourceTree = "<group>"; };
+		15D42935291032FE0050BBFE /* ShopBagTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ShopBagTableViewCell.xib; sourceTree = "<group>"; };
 		15F6420928E0537400A9A545 /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		15FAA06728DB73EF009D77D1 /* HomeNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeNavigationController.swift; sourceTree = "<group>"; };
 		15FAA06928DB7445009D77D1 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -200,6 +204,7 @@
 				15492E2F28FD87790016C337 /* HistoryTableViewCell.xib */,
 				1575D30129068CBC00A8423F /* OrderTableViewCell.xib */,
 				15B8F94C2908394E00E7F3F8 /* DrinkInfoTableViewCell.xib */,
+				15D42935291032FE0050BBFE /* ShopBagTableViewCell.xib */,
 			);
 			path = Storyboard;
 			sourceTree = "<group>";
@@ -213,6 +218,7 @@
 				1587A84328F599110086B564 /* ShopCollectionViewCell.swift */,
 				1575D30029068CBC00A8423F /* OrderTableViewCell.swift */,
 				15B8F94B2908394E00E7F3F8 /* DrinkInfoTableViewCell.swift */,
+				15D42934291032FE0050BBFE /* ShopBagTableViewCell.swift */,
 				15492E2E28FD87790016C337 /* HistoryTableViewCell.swift */,
 			);
 			path = Cell;
@@ -286,6 +292,7 @@
 			files = (
 				1587A84628F599110086B564 /* ShopCollectionViewCell.xib in Resources */,
 				1534EB6B28C6429200BBE7D0 /* LaunchScreen.storyboard in Resources */,
+				15D42937291032FE0050BBFE /* ShopBagTableViewCell.xib in Resources */,
 				1534EB6828C6429200BBE7D0 /* Assets.xcassets in Resources */,
 				15492E2728FBEE530016C337 /* PickupTableViewCell.xib in Resources */,
 				1555D3C728E02DD200650C1C /* HomeTableViewCell.xib in Resources */,
@@ -308,6 +315,7 @@
 				1555D3C328DB7FAC00650C1C /* ShopViewController.swift in Sources */,
 				15FAA07028DB781C009D77D1 /* CustomTabBarController.swift in Sources */,
 				15B8F94A2908368B00E7F3F8 /* DrinkInfoViewController.swift in Sources */,
+				15D42936291032FE0050BBFE /* ShopBagTableViewCell.swift in Sources */,
 				15492E2928FBF45D0016C337 /* Order.swift in Sources */,
 				15968D2C28E0335200E28278 /* Menu.swift in Sources */,
 				15FAA06E28DB7799009D77D1 /* HomeTabBarController.swift in Sources */,

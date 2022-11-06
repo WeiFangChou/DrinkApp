@@ -88,6 +88,7 @@ class HistoryViewController: UIViewController, HistoryTableViewCellDelegate{
                 case .failure(let failure):
                     print(failure)
                     self.noDataView.isHidden = false
+                    self.refreshControl.endRefreshing()
                 }
             }
         }
@@ -107,8 +108,6 @@ class HistoryViewController: UIViewController, HistoryTableViewCellDelegate{
 }
 
 extension HistoryViewController: UITableViewDelegate, UITableViewDataSource{
-
-
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 140
@@ -130,14 +129,12 @@ extension HistoryViewController: UITableViewDelegate, UITableViewDataSource{
                 if let addon = drink.addon?.count {
                     cost += drink.cost + (addon * 10)
                 }
-                
             }
         }
         cell.backgroundColor = .clear
         cell.orderDrinksImage.load(from: "https://www.milkshoptea.com/upload/product_catalog/2208261105400000001.png")
         cell.orderDrinksTitleLabel.text = index.shopName
         cell.orderDrinkssecTitleLabel.text = "\(index.drinks?.count ?? 0) 杯飲料・\(cost) 元"
-        
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy/MM/dd HH:mm:ss"
         dateFormatter.locale = Locale(identifier: "zh_Hant_TW")

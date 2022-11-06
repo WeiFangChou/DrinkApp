@@ -88,7 +88,7 @@ class OrderViewController: UIViewController {
     }()
     
     lazy var cancelButton: UIButton = {
-       let button = UIButton(frame: CGRect(x: 50, y: 50, width: 40, height: 30))
+        let button = UIButton(frame: CGRect(x: 50, y: 50, width: 40, height: 30))
         button.setTitle("Cancel", for: .normal)
         button.addTarget(self, action: #selector(cancelButtonTap), for: .touchUpInside)
         return button
@@ -108,7 +108,7 @@ class OrderViewController: UIViewController {
         }
         
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
@@ -122,12 +122,12 @@ class OrderViewController: UIViewController {
         self.title = order.shopName
         
     }
-   required init?(coder aDecoder: NSCoder) {
-       super.init(coder: aDecoder)
-       
-   }
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        
+    }
     
-
+    
     
     
     func setupUI(){
@@ -145,7 +145,6 @@ class OrderViewController: UIViewController {
     }
     
     func fetchMenu() {
-        
         APICaller.shared.getMenu { result in
             switch result {
             case .failure(let error):
@@ -165,14 +164,24 @@ class OrderViewController: UIViewController {
     
     @objc func shoppingBagButtonTapped() {
         if let order = order {
+            print(order)
             let shopbagViewController = ShopBagViewController(order: order)
-            present(shopbagViewController, animated: true)
+            APICaller.shared.updateOrder(order: order) { [weak self] result in
+                guard let self = self else {return}
+                switch result {
+                case .failure(let error):
+                    print(error)
+                case .success(let success):
+                    print(success)
+                    DispatchQueue.main.async {
+                        self.present(shopbagViewController, animated: true)
+                    }
+                }
+            }
         }
     }
     
     
-        
-
 }
 
 extension OrderViewController: UITableViewDelegate, UITableViewDataSource {
@@ -211,17 +220,18 @@ extension OrderViewController: UITableViewDelegate, UITableViewDataSource {
         guard let cell = tableView.cellForRow(at: indexPath) as? OrderTableViewCell else {
             return
         }
-        let drinkInMenu = menus[indexPath.row]
-        let drink = Drinks(id: drinkInMenu.id, name: drinkInMenu.name, size: "大杯", cost: drinkInMenu.largePrice, ice: 4, sweet: 4, addon: nil)
-        let drinkInfoViewController = DrinkInfoViewController(drink: drink)
-        drinkInfoViewController.delegate = self
-        present(drinkInfoViewController, animated: true)
-        
+        if let row = self.dicMenus[sections[indexPath.section]]?[indexPath.row] {
+            let drink = Drinks(id: row.id, name: row.name, size: "Large", cost: row.largePrice, ice: Ice.noIce.rawValue, sweet: Sugar.lowSugar.rawValue, addon: [])
+            let drinkInfoViewController = DrinkInfoViewController(drink: drink)
+            drinkInfoViewController.delegate = self
+            drinkInfoViewController.title = row.name
+            present(drinkInfoViewController, animated: true)
+        }
     }
     
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         if let headerView = view as? UITableViewHeaderFooterView {
-            headerView.textLabel?.font = UIFont(name: "Arial-BoldMT", size: 25)
+            headerView.textLabel?.font = .systemFont(ofSize: 25)
             headerView.textLabel?.textColor = .white
         }
     }
@@ -244,8 +254,22 @@ extension OrderViewController: UIAdaptivePresentationControllerDelegate {
 
 extension OrderViewController: DrinkInfoViewControllerDelegate {
     func drinkInfoChanged(drink: Drinks) {
-        self.order?.addDrink(drink: drink)
+        
+        if let order = order {
+            self.order?.addDrink(drink: drink)
+            APICaller.shared.updateOrder(order: order) { [weak self] result  in
+                switch result {
+                case .failure(let error):
+                    print("Error : ",error)
+                case .success(let success):
+                    print("Success : ",success)
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                        guard let  self = self else {return}
+                        let alertController = UIAlertController(title: "", message: "Success Update drink in Order", preferredStyle: .alert)
+                        self.present(alertController, animated: true)
+                    }
+                }
+            }
+        }
     }
-    
-    
 }
