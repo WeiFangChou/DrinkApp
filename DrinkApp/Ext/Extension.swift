@@ -41,31 +41,28 @@ extension UIImageView {
         return imageView
     }
     
-    func load(from urlString: String){
-        
+    func load(from urlString: String) -> UIImage?{
+        var resultImage = UIImage()
         if let imageFromCache = imageCache.object(forKey: urlString as NSString) as? UIImage {
-            self.image = imageFromCache
-            return
+            resultImage = imageFromCache
+            return resultImage
         }
         
         guard let url = URL(string: urlString) else {
-            return
+            return nil
         }
         DispatchQueue.global().async { [weak self] in
             if let data = try? Data(contentsOf: url) {
                 if let image = UIImage(data: data) {
                     DispatchQueue.main.async {
                         imageCache.setObject(image, forKey: urlString as NSString)
-                        self?.image = image
+                        resultImage = image
                     }
                 }
             }
         }
-        
-        
+        return resultImage
     }
-    
-    
 }
 
 
@@ -76,17 +73,27 @@ extension UIColor {
 
 extension UIViewController {
     
-    func showAlertView(title: String?, message: String,compection: @escaping(AlertError)-> ()) {
+    func showAlertView(title: String?, message: String,complection: @escaping(AlertError)-> ()) {
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let alertAction = UIAlertAction(title: "OK", style: .default) { action in
-            compection(.OKAction)
+            complection(.OKAction)
         }
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { cancelAction in
-            compection(.CancelAction)
+            complection(.CancelAction)
         }
         alertController.addAction(alertAction)
         alertController.addAction(cancelAction)
         present(alertController, animated: true)
+    }
+    
+    func showAlertView(title: String?, message: String, complection: @escaping ()->()) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        present(alertController, animated: true) {
+            sleep(2)
+            self.dismiss(animated: true) {
+                complection()
+            }
+        }
     }
     
 }
@@ -94,4 +101,44 @@ extension UIViewController {
 enum AlertError: Error {
     case OKAction
     case CancelAction
+}
+
+
+extension UIView {
+    func anchor(top: NSLayoutYAxisAnchor? = nil, bottom: NSLayoutYAxisAnchor? = nil, left: NSLayoutXAxisAnchor? = nil, right: NSLayoutXAxisAnchor? = nil,
+                topConstant: CGFloat = 0, leftConstant: CGFloat = 0, bottomConstant: CGFloat = 0, rightConstant: CGFloat = 0,
+                widthConstant: CGFloat = 0, heighConstant: CGFloat = 0) -> [NSLayoutConstraint] {
+        translatesAutoresizingMaskIntoConstraints = false
+        
+        var anchors = [NSLayoutConstraint]()
+        
+        if let top = top {
+            anchors.append(top.constraint(equalTo: top, constant: topConstant))
+        }
+        
+        if let left = left {
+            anchors.append(left.constraint(equalTo: left, constant: leftConstant))
+        }
+        
+        if let right = right {
+            anchors.append(right.constraint(equalTo: right, constant: -rightConstant))
+        }
+        
+        if let bottom = bottom {
+            anchors.append(bottom.constraint(equalTo: bottom, constant: -bottomConstant))
+        }
+        
+        if widthConstant > 0 {
+            anchors.append(widthAnchor.constraint(equalToConstant: widthConstant))
+        }
+        
+        if rightConstant > 0 {
+            anchors.append(heightAnchor.constraint(equalToConstant: heighConstant))
+        }
+        
+        anchors.forEach({$0.isActive = true})
+        
+        return anchors
+    }
+    
 }

@@ -8,13 +8,9 @@
 import UIKit
 
 
-protocol OrderViewControllerDelegate {
-    func updateShopBag(order: Order)
-}
+
 
 class OrderViewController: UIViewController {
-    
-    var delegate: OrderViewControllerDelegate?
     
     var order : Order? {
         didSet{
@@ -138,6 +134,10 @@ class OrderViewController: UIViewController {
         presentationController?.delegate = self
         shoppingBagButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -35).isActive = true
         shoppingBagButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        
+        
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: nil)
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Done", style: .plain, target: self, action: nil)
     }
     
     @objc func cancelButtonTap(sender: UIButton) {
@@ -166,6 +166,7 @@ class OrderViewController: UIViewController {
         if let order = order {
             print(order)
             let shopbagViewController = ShopBagViewController(order: order)
+            shopbagViewController.delegate = self
             APICaller.shared.updateOrder(order: order) { [weak self] result in
                 guard let self = self else {return}
                 switch result {
@@ -221,7 +222,7 @@ extension OrderViewController: UITableViewDelegate, UITableViewDataSource {
             return
         }
         if let row = self.dicMenus[sections[indexPath.section]]?[indexPath.row] {
-            let drink = Drinks(id: row.id, name: row.name, size: "Large", cost: row.largePrice, ice: Ice.noIce.rawValue, sweet: Sugar.lowSugar.rawValue, addon: [])
+            let drink = Drinks(id: row.id, name: row.name, cost: row.largePrice)
             let drinkInfoViewController = DrinkInfoViewController(drink: drink)
             drinkInfoViewController.delegate = self
             drinkInfoViewController.title = row.name
@@ -242,7 +243,9 @@ extension OrderViewController: UIAdaptivePresentationControllerDelegate {
     func presentationControllerDidAttemptToDismiss(_ presentationController: UIPresentationController) {
         let alertController = UIAlertController(title: nil, message: "Cancel ?", preferredStyle: .actionSheet)
         let alertAction = UIAlertAction(title: "Discard Changes", style: .default) { alert in
-            self.dismiss(animated: true)
+            self.showAlertView(title: "Error", message: "Failed to cancel order") {
+                
+            }
         }
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
         alertController.addAction(alertAction)
@@ -255,19 +258,30 @@ extension OrderViewController: UIAdaptivePresentationControllerDelegate {
 extension OrderViewController: DrinkInfoViewControllerDelegate {
     func drinkInfoChanged(drink: Drinks) {
         
-        if let order = order {
-            self.order?.addDrink(drink: drink)
+        self.order?.addDrink(drink: drink)
+        if let order = self.order {
             APICaller.shared.updateOrder(order: order) { [weak self] result  in
                 switch result {
                 case .failure(let error):
                     print("Error : ",error)
                 case .success(let success):
                     print("Success : ",success)
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-                        guard let  self = self else {return}
-                        let alertController = UIAlertController(title: "", message: "Success Update drink in Order", preferredStyle: .alert)
-                        self.present(alertController, animated: true)
-                    }
+                }
+            }
+        }
+    }
+    
+    
+}
+
+extension OrderViewController: ShopBagViewControllerDelegate {
+    func doneShoppingOrder(order: Order) {
+        DispatchQueue.main.async {
+            self.dismiss(animated: true) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                    let userInfo : [String: Order] = ["order": order]
+                    let showOrderDetailName = Notification.Name(rawValue: "showOrderDetail")
+                    NotificationCenter.default.post(name: showOrderDetailName, object: nil, userInfo: userInfo)
                 }
             }
         }

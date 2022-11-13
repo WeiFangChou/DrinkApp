@@ -25,7 +25,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         }
         
         window = UIWindow(frame: windowScene.coordinateSpace.bounds)
-        let homeTabBarController = HomeTabBarController()
+        let homeTabBarController = MainTabBarController()
         window?.rootViewController = homeTabBarController
         window?.windowScene = windowScene
         window?.makeKeyAndVisible()

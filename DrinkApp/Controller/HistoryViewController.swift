@@ -11,7 +11,9 @@ protocol HistoryViewControllerDelegate{
 }
 
 class HistoryViewController: UIViewController, HistoryTableViewCellDelegate{
+    
     var delegate: HistoryViewControllerDelegate?
+    
     lazy var refreshControl: UIRefreshControl = {
        let refreshControl = UIRefreshControl(frame: CGRect(x: view.center.x, y: view.center.y, width: 50, height: 50))
         refreshControl.addTarget(self, action: #selector(reloadData), for: .valueChanged)
@@ -19,24 +21,22 @@ class HistoryViewController: UIViewController, HistoryTableViewCellDelegate{
         return refreshControl
     }()
     
-    lazy var noDataView : UIView = {
-        let view = UIView(frame: CGRect(x: 0, y: 0, width: 200, height: 200))
-        let label = UILabel(frame: CGRect(x: 0, y: 0, width: 180, height: 180))
-        view.addSubview(label)
-        view.center = self.view.center
-        label.text = "Your don't have any History Order !"
-        return view
+    lazy var noDataView : UIImageView = {
+        let imageView = UIImageView(image: UIImage(named: "nodata"))
+        imageView.contentMode = .scaleAspectFit
+        view.addSubview(imageView)
+        return imageView
     }()
     
     lazy var historyTableView : UITableView = {
-        let tableview = UITableView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: view.bounds.height))
-        tableview.backgroundColor = .MilkGreen
+        let tableview = UITableView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: view.bounds.height), style: .insetGrouped)
         tableview.register(UINib(nibName: "HistoryTableViewCell", bundle: nil), forCellReuseIdentifier: HistoryTableViewCell.Identifier)
         tableview.delegate = self
         tableview.dataSource = self
         tableview.allowsSelection = false
-        tableview.addSubview(noDataView)
+        tableview.backgroundView = noDataView
         tableview.addSubview(refreshControl)
+        tableview.backgroundColor = .MilkGreen
         return tableview
     }()
     
@@ -51,24 +51,20 @@ class HistoryViewController: UIViewController, HistoryTableViewCellDelegate{
         title = "最近訂單"
         
         noDataView.isHidden = false
-        
+        view.backgroundColor = .clear
         view.addSubview(historyTableView)
         historyTableView.center = view.center
         historyTableView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
         historyTableView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
         historyTableView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
         historyTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
-        
         fetchHistoryOrder()
     }
     
     @objc func reloadData() {
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-            
             self.fetchHistoryOrder()
         }
-        
-        
     }
     
     func fetchHistoryOrder() {
@@ -86,13 +82,17 @@ class HistoryViewController: UIViewController, HistoryTableViewCellDelegate{
                     }
                     
                 case .failure(let failure):
-                    print(failure)
-                    self.noDataView.isHidden = false
-                    self.refreshControl.endRefreshing()
+                    DispatchQueue.main.async {
+                        self.showAlertView(title: "Error", message: "Failed to fetch data"){
+                            self.noDataView.isHidden = false
+                            self.refreshControl.endRefreshing()
+                        }
+                    }
+
+                   
                 }
             }
         }
-        
     }
     
     func reOrderButtonTap(cell: HistoryTableViewCell) {
@@ -102,9 +102,6 @@ class HistoryViewController: UIViewController, HistoryTableViewCellDelegate{
         tabBarController?.selectedIndex = 2
         delegate?.preOrder(order: orders[index])
     }
-
-    
-
 }
 
 extension HistoryViewController: UITableViewDelegate, UITableViewDataSource{
@@ -131,7 +128,7 @@ extension HistoryViewController: UITableViewDelegate, UITableViewDataSource{
                 }
             }
         }
-        cell.backgroundColor = .clear
+        cell.backgroundColor = .white
         cell.orderDrinksImage.load(from: "https://www.milkshoptea.com/upload/product_catalog/2208261105400000001.png")
         cell.orderDrinksTitleLabel.text = index.shopName
         cell.orderDrinkssecTitleLabel.text = "\(index.drinks?.count ?? 0) 杯飲料・\(cost) 元"

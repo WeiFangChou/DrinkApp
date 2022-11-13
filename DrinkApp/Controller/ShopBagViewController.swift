@@ -7,12 +7,14 @@
 
 import UIKit
 
-
+protocol ShopBagViewControllerDelegate {
+    func doneShoppingOrder(order: Order)
+}
 
 class ShopBagViewController: UIViewController {
 
     var order: Order?
-    
+    var delegate: ShopBagViewControllerDelegate?
     
     lazy var shoppingListTableView: UITableView = {
         let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: view.bounds.height), style: .insetGrouped)
@@ -20,6 +22,18 @@ class ShopBagViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         return tableView
+    }()
+    
+    lazy var sendOrderButton : UIButton = {
+        let button = UIButton(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 100))
+        button.setTitle("點餐", for: .normal)
+        button.setTitleColor(.white, for: .normal)
+        button.backgroundColor = .MilkGreen
+        button.addTarget(self, action: #selector(sendOrderButtonTap), for: .touchUpInside)
+        button.layer.masksToBounds = true
+        button.layer.cornerRadius = 30
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
     }()
     
     init(order: Order) {
@@ -39,9 +53,25 @@ class ShopBagViewController: UIViewController {
     
     func setupUI () {
         
+        
         view.addSubview(shoppingListTableView)
+        view.addSubview(sendOrderButton)
+        sendOrderButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -40).isActive = true
+        sendOrderButton.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+        sendOrderButton.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+        sendOrderButton.widthAnchor.constraint(equalToConstant: view.frame.width - 100).isActive = true
+        sendOrderButton.heightAnchor.constraint(equalToConstant: 80).isActive = true
+    }
+    
+    @objc func sendOrderButtonTap() {
+        if let order = order {
+            self.dismiss(animated: true) {
+                self.delegate?.doneShoppingOrder(order: order)
+            }
+        }
     }
 }
+
 
 
 extension ShopBagViewController: UITableViewDelegate, UITableViewDataSource {
@@ -59,11 +89,24 @@ extension ShopBagViewController: UITableViewDelegate, UITableViewDataSource {
         if let order = order, let drinks = order.drinks{
             let row = drinks[indexPath.row]
             var detail = ""
+            if let drinkSize = row.size, let drinkIce = row.ice, let drinkSweet = row.sweet{
+                detail += Size(rawValue: drinkSize)!.rawValue
+                detail += " "
+                detail += Ice(rawValue: drinkIce)!.value
+                detail += " "
+                detail += Sugar(rawValue: drinkSweet)!.value
+            }
+            
+            if let addons = row.addon {
+                detail += "\n"
+                addons.forEach { addon in
+                    detail += addon
+                }
+            }
             cell.drinkNameLabel.text = row.name
             cell.drinkImageView.load(from: "https://www.milkshoptea.com/upload/product_catalog/2208261105400000001.png")
+            cell.drinkDetailLabel.numberOfLines = 0
             cell.drinkDetailLabel.text = detail
-            print(detail)
-            
         }
         
         return cell

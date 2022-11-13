@@ -11,6 +11,9 @@
 		1534EB6128C6429100BBE7D0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1534EB6028C6429100BBE7D0 /* SceneDelegate.swift */; };
 		1534EB6828C6429200BBE7D0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1534EB6728C6429200BBE7D0 /* Assets.xcassets */; };
 		1534EB6B28C6429200BBE7D0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1534EB6928C6429200BBE7D0 /* LaunchScreen.storyboard */; };
+		1544BD3C291A9A0200614B70 /* OrderDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1544BD3B291A9A0200614B70 /* OrderDetailViewController.swift */; };
+		1544BD412920E29300614B70 /* OrderDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1544BD3F2920E29300614B70 /* OrderDetailTableViewCell.swift */; };
+		1544BD422920E29300614B70 /* OrderDetailTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1544BD402920E29300614B70 /* OrderDetailTableViewCell.xib */; };
 		15492E2128FBEC740016C337 /* HistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15492E2028FBEC740016C337 /* HistoryViewController.swift */; };
 		15492E2628FBEE530016C337 /* PickupTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15492E2428FBEE530016C337 /* PickupTableViewCell.swift */; };
 		15492E2728FBEE530016C337 /* PickupTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 15492E2528FBEE530016C337 /* PickupTableViewCell.xib */; };
@@ -42,7 +45,7 @@
 		15FAA06828DB73EF009D77D1 /* HomeNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15FAA06728DB73EF009D77D1 /* HomeNavigationController.swift */; };
 		15FAA06A28DB7445009D77D1 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15FAA06928DB7445009D77D1 /* HomeViewController.swift */; };
 		15FAA06C28DB748D009D77D1 /* PickUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15FAA06B28DB748D009D77D1 /* PickUpViewController.swift */; };
-		15FAA06E28DB7799009D77D1 /* HomeTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15FAA06D28DB7799009D77D1 /* HomeTabBarController.swift */; };
+		15FAA06E28DB7799009D77D1 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15FAA06D28DB7799009D77D1 /* MainTabBarController.swift */; };
 		15FAA07028DB781C009D77D1 /* CustomTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15FAA06F28DB781C009D77D1 /* CustomTabBarController.swift */; };
 /* End PBXBuildFile section */
 
@@ -53,6 +56,9 @@
 		1534EB6728C6429200BBE7D0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1534EB6A28C6429200BBE7D0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1534EB6C28C6429200BBE7D0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1544BD3B291A9A0200614B70 /* OrderDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderDetailViewController.swift; sourceTree = "<group>"; };
+		1544BD3F2920E29300614B70 /* OrderDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderDetailTableViewCell.swift; sourceTree = "<group>"; };
+		1544BD402920E29300614B70 /* OrderDetailTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OrderDetailTableViewCell.xib; sourceTree = "<group>"; };
 		15492E2028FBEC740016C337 /* HistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryViewController.swift; sourceTree = "<group>"; };
 		15492E2428FBEE530016C337 /* PickupTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickupTableViewCell.swift; sourceTree = "<group>"; };
 		15492E2528FBEE530016C337 /* PickupTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PickupTableViewCell.xib; sourceTree = "<group>"; };
@@ -84,7 +90,7 @@
 		15FAA06728DB73EF009D77D1 /* HomeNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeNavigationController.swift; sourceTree = "<group>"; };
 		15FAA06928DB7445009D77D1 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		15FAA06B28DB748D009D77D1 /* PickUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickUpViewController.swift; sourceTree = "<group>"; };
-		15FAA06D28DB7799009D77D1 /* HomeTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTabBarController.swift; sourceTree = "<group>"; };
+		15FAA06D28DB7799009D77D1 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		15FAA06F28DB781C009D77D1 /* CustomTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBarController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -156,13 +162,14 @@
 			children = (
 				15FAA06F28DB781C009D77D1 /* CustomTabBarController.swift */,
 				15FAA06728DB73EF009D77D1 /* HomeNavigationController.swift */,
-				15FAA06D28DB7799009D77D1 /* HomeTabBarController.swift */,
+				15FAA06D28DB7799009D77D1 /* MainTabBarController.swift */,
 				15FAA06928DB7445009D77D1 /* HomeViewController.swift */,
 				1555D3C228DB7FAC00650C1C /* ShopViewController.swift */,
 				15FAA06B28DB748D009D77D1 /* PickUpViewController.swift */,
 				15492E2A28FD78300016C337 /* OrderViewController.swift */,
 				1578CDF3290D1FAA0064CFC8 /* ShopBagViewController.swift */,
 				15B8F9492908368B00E7F3F8 /* DrinkInfoViewController.swift */,
+				1544BD3B291A9A0200614B70 /* OrderDetailViewController.swift */,
 				15492E2028FBEC740016C337 /* HistoryViewController.swift */,
 			);
 			path = Controller;
@@ -205,6 +212,7 @@
 				1575D30129068CBC00A8423F /* OrderTableViewCell.xib */,
 				15B8F94C2908394E00E7F3F8 /* DrinkInfoTableViewCell.xib */,
 				15D42935291032FE0050BBFE /* ShopBagTableViewCell.xib */,
+				1544BD402920E29300614B70 /* OrderDetailTableViewCell.xib */,
 			);
 			path = Storyboard;
 			sourceTree = "<group>";
@@ -220,6 +228,7 @@
 				15B8F94B2908394E00E7F3F8 /* DrinkInfoTableViewCell.swift */,
 				15D42934291032FE0050BBFE /* ShopBagTableViewCell.swift */,
 				15492E2E28FD87790016C337 /* HistoryTableViewCell.swift */,
+				1544BD3F2920E29300614B70 /* OrderDetailTableViewCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -294,6 +303,7 @@
 				1534EB6B28C6429200BBE7D0 /* LaunchScreen.storyboard in Resources */,
 				15D42937291032FE0050BBFE /* ShopBagTableViewCell.xib in Resources */,
 				1534EB6828C6429200BBE7D0 /* Assets.xcassets in Resources */,
+				1544BD422920E29300614B70 /* OrderDetailTableViewCell.xib in Resources */,
 				15492E2728FBEE530016C337 /* PickupTableViewCell.xib in Resources */,
 				1555D3C728E02DD200650C1C /* HomeTableViewCell.xib in Resources */,
 				15492E3128FD87790016C337 /* HistoryTableViewCell.xib in Resources */,
@@ -313,18 +323,20 @@
 				15B8F94D2908394E00E7F3F8 /* DrinkInfoTableViewCell.swift in Sources */,
 				1534EB5F28C6429100BBE7D0 /* AppDelegate.swift in Sources */,
 				1555D3C328DB7FAC00650C1C /* ShopViewController.swift in Sources */,
+				1544BD412920E29300614B70 /* OrderDetailTableViewCell.swift in Sources */,
 				15FAA07028DB781C009D77D1 /* CustomTabBarController.swift in Sources */,
 				15B8F94A2908368B00E7F3F8 /* DrinkInfoViewController.swift in Sources */,
 				15D42936291032FE0050BBFE /* ShopBagTableViewCell.swift in Sources */,
 				15492E2928FBF45D0016C337 /* Order.swift in Sources */,
 				15968D2C28E0335200E28278 /* Menu.swift in Sources */,
-				15FAA06E28DB7799009D77D1 /* HomeTabBarController.swift in Sources */,
+				15FAA06E28DB7799009D77D1 /* MainTabBarController.swift in Sources */,
 				1587A83F28F2B5E00086B564 /* ShopTableViewCell.swift in Sources */,
 				1575D30229068CBC00A8423F /* OrderTableViewCell.swift in Sources */,
 				1555D3C628E02DD200650C1C /* HomeTableViewCell.swift in Sources */,
 				1578CDF4290D1FAA0064CFC8 /* ShopBagViewController.swift in Sources */,
 				15492E2628FBEE530016C337 /* PickupTableViewCell.swift in Sources */,
 				15492E3028FD87790016C337 /* HistoryTableViewCell.swift in Sources */,
+				1544BD3C291A9A0200614B70 /* OrderDetailViewController.swift in Sources */,
 				1555D3C128DB7B8900650C1C /* CustomBarItem.swift in Sources */,
 				15FAA06C28DB748D009D77D1 /* PickUpViewController.swift in Sources */,
 				15492E2B28FD78300016C337 /* OrderViewController.swift in Sources */,

@@ -10,16 +10,17 @@ import UIKit
 
 
 class PickUpViewController: UIViewController, HistoryViewControllerDelegate {
-
-
     
     lazy var pickerView : UIPickerView = {
         let picker = UIPickerView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: view.bounds.height))
         picker.delegate = self
         picker.dataSource = self
+        picker.backgroundColor = .white
+        picker.layer.cornerRadius = 20
+        picker.layer.masksToBounds = true
         return picker
     }()
-    lazy var pickupTableView : UITableView = {
+    lazy var shopTableView : UITableView = {
        
         let table = UITableView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: view.bounds.height),style: .insetGrouped)
         table.delegate = self
@@ -55,13 +56,14 @@ class PickUpViewController: UIViewController, HistoryViewControllerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-       
+        setupUI()
+        let showOrderDetailName = Notification.Name(rawValue: "showOrderDetail")
+        NotificationCenter.default.addObserver(self, selector: #selector(self.presentOrderInfoViewController), name:  showOrderDetailName, object: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        setupUI()
+        
         
     }
     
@@ -71,34 +73,40 @@ class PickUpViewController: UIViewController, HistoryViewControllerDelegate {
     
     func setupUI() {
         view.addSubview(pickerView)
-        view.addSubview(pickupTableView)
-        pickupTableView.frame = CGRect(x: 0, y: 0 + 300, width: view.bounds.width, height: view.bounds.height - 300)
+        view.addSubview(shopTableView)
+        shopTableView.frame = CGRect(x: 0, y: 0 + 300, width: view.bounds.width, height: view.bounds.height - 300)
         pickerView.frame = CGRect(x: 0, y: 100, width: view.bounds.width, height: 150)
         currentShops = shops
-        
+        view.backgroundColor = .MilkGreen
     }
     
     func preOrder(order: Order) {
         APICaller.shared.createOrder(order: order) { result in
             switch result{
             case .failure(let error):
-                self.showAlertView(title: "Error", message: error.localizedDescription) { alertError in
-                    print(alertError)
+                DispatchQueue.main.async {
+                    self.showAlertView(title: "Error", message: error.localizedDescription) {
+                        self.dismiss(animated: true)
+                    }
                 }
-                break
             case .success(let order):
                 DispatchQueue.main.async {
                     let orderViewController = OrderViewController(order: order)
-                    self.present(orderViewController, animated: true)
+                    self.navigationController?.present(orderViewController, animated: true)
                 }
-                break
             }
         }
-        
     }
     
+    @objc func presentOrderInfoViewController (notification: Notification) {
+        if let userInfo = notification.userInfo ,let order = userInfo["order"] as? Order{
+            DispatchQueue.main.async {
+                let orderInfoViewController = OrderDetailViewController(order: order)
+                self.present(orderInfoViewController, animated: true)
+            }
+        }
+    }
     
-
 }
 extension PickUpViewController: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -115,7 +123,7 @@ extension PickUpViewController: UITableViewDelegate, UITableViewDataSource {
         let index = currentShops[indexPath.row]
         cell.cityNameLabel.text = index.shopName
         cell.regionNameLabel.text = index.shopAddress
-        cell.backgroundColor = .clear
+        cell.backgroundColor = .white
         cell.layer.cornerRadius = 15
         cell.layer.masksToBounds = true
         return cell
@@ -197,7 +205,7 @@ extension PickUpViewController: UIPickerViewDelegate, UIPickerViewDataSource {
         for shop in shops where shop.shopCity == selectCity && shop.shopRegion == selectRegion {
             currentShops.append(shop)
         }
-        self.pickupTableView.reloadData()
+        self.shopTableView.reloadData()
     }
     
     

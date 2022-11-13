@@ -9,6 +9,7 @@ import UIKit
 
 class HomeViewController: UIViewController {
     
+    
     var menus : [Menu] = []
     var dicMenus = Dictionary<String, Array<Menu>>()
     var sections: [String] = []
@@ -21,7 +22,6 @@ class HomeViewController: UIViewController {
         tableView.backgroundColor = .MilkGreen
         tableView.layer.bounds = view.bounds
         tableView.rowHeight = 170
-        
         return tableView
     }()
     
@@ -41,7 +41,7 @@ class HomeViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        fetchMenuData()
+        
     }
     
     func setupUI() {
@@ -49,7 +49,6 @@ class HomeViewController: UIViewController {
         print("HomeView")
         view.backgroundColor = .MilkGreen
         title = "菜單"
-        
         view.addSubview(homeTableView)
         homeTableView.delegate = self
         homeTableView.dataSource = self
@@ -60,7 +59,7 @@ class HomeViewController: UIViewController {
         homeTableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
         homeTableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
         homeTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
-        
+        fetchMenuData()
     }
     
     

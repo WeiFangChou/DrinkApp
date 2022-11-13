@@ -188,7 +188,7 @@ class APICaller {
                                 complection(.success(result))
                             }
                         }catch{
-                            print(error)
+                            complection(.failure(error))
                         }
                     }.resume()
                 }catch{

@@ -32,8 +32,10 @@ class DrinkInfoViewController: UIViewController {
     lazy var titleDrinkInfolabel: UILabel = {
         let label = UILabel(frame: CGRect(x: 0, y: 15, width: 150, height: 25))
         label.contentMode = .center
+        label.textAlignment = .center
         label.text = ""
         label.numberOfLines = 1
+        label.textColor = .white
         return label
     }()
     lazy var saveDrinkInfoButton : UIButton = {
@@ -45,7 +47,7 @@ class DrinkInfoViewController: UIViewController {
     }()
     
     lazy var cancelDrinkInfoButton: UIButton = {
-       let button = UIButton(frame: CGRect(x:  25, y: 15, width: 80, height: 25))
+       let button = UIButton(frame: CGRect(x:  10, y: 15, width: 80, height: 25))
         button.setTitle("Cancel", for: .normal)
         button.addTarget(self, action: #selector(cancelDrinkInfo), for: .touchUpInside)
         return button
@@ -92,9 +94,25 @@ class DrinkInfoViewController: UIViewController {
     }
     
     @objc func saveDrinkInfo() {
+        guard let _ = drink.size else {
+            drinkinfoTableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
+            return
+        }
+        guard let _ = drink.ice else {
+            drinkinfoTableView.scrollToRow(at: IndexPath(row: 0, section: 1), at: .top, animated: true)
+            return
+        }
+        guard let _ = drink.sweet else {
+            drinkinfoTableView.scrollToRow(at: IndexPath(row: 0, section: 2), at: .top, animated: true)
+            return
+        }
+        if drink.addon == nil {
+            drink.addon = []
+        }
         dismiss(animated: true) {
             self.delegate?.drinkInfoChanged(drink: self.drink)
         }
+        
     }
     
     @objc func cancelDrinkInfo() {
@@ -167,10 +185,7 @@ extension DrinkInfoViewController: UITableViewDelegate, UITableViewDataSource {
             default:
                 return
             }
-            
-            
         }
-        print(drink)
     }
     
     func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {

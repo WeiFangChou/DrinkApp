@@ -28,14 +28,14 @@ struct Order: Codable {
 struct Drinks: Codable {
     var id: UUID
     var name: String
-    var size: String
+    var size: String?
     var cost: Int
-    var ice: Int
-    var sweet: Int
+    var ice: Int?
+    var sweet: Int?
     var addon: [String]?
 }
 
-enum Ice: Int,Codable {
+enum Ice: Int, Codable {
     case roomTemp = 0
     case noIce = 1
     case normalIce = 2
@@ -57,7 +57,7 @@ enum Ice: Int,Codable {
     }
 }
 
-enum Size: String,Codable {
+enum Size: String, Codable {
     case large = "大杯"
     case mid = "中杯"
 }
