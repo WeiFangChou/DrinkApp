@@ -15,7 +15,6 @@ class APICaller {
     static let shared = APICaller()
     
     
-    
     func getMenu(complection: @escaping(Result<[Menu] ,Error>) -> ()) {
         if let url = URL(string: APICaller.baseURL + "get/milkshamenu") {
             
@@ -50,7 +49,6 @@ class APICaller {
             let content = try? jsonEncoder.encode(order)
             guard let content = content else { return }
             request.httpBody = content
-            do{
                 URLSession.shared.dataTask(with: request) { data, response, error in
                     do{
                         if let error = error {
@@ -61,14 +59,11 @@ class APICaller {
                             let result = try jsonDecoder.decode(Order.self, from: data)
                             complection(.success(result))
                         }
-                    }catch{
+                    }catch(let error){
                         print(error)
+                        complection(.failure(error))
                     }
                 }.resume()
-            }catch{
-                print(error)
-                complection(.failure(error))
-            }
         }
         
     }
@@ -81,9 +76,8 @@ class APICaller {
                 request.httpMethod = "PUT"
                 request.setValue("application/json", forHTTPHeaderField: "Content-Type")
                 let content = try? jsonEncoder.encode(order)
-                print(String(data: content!, encoding: .utf8))
+//                print(String(data: content!, encoding: .utf8))
                 request.httpBody = content
-                do{
                     URLSession.shared.dataTask(with: request) { data, response, error in
                         do{
                             if let error = error {
@@ -96,12 +90,9 @@ class APICaller {
                             }
                         }catch{
                             print(error)
+                            complection(.failure(error))
                         }
                     }.resume()
-                }catch{
-                    print(error)
-                    complection(.failure(error))
-                }
             }
         }
         
@@ -109,32 +100,25 @@ class APICaller {
     func getOrder(order: Order,complection: @escaping(Result<Order, Error>)-> ()) {
         if let orderUUID = order.id {
             if let url = URL(string: APICaller.baseURL + "order/\(orderUUID)" ){
-                let jsonEncoder = JSONEncoder()
                 let jsonDecoder = JSONDecoder()
                 var request = URLRequest(url: url)
                 request.httpMethod = "GET"
                 request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-                let content = try? jsonEncoder.encode(order)
-                
-                do{
-                    URLSession.shared.dataTask(with: request) { data, response, error in
-                        do{
-                            if let error = error {
-                                complection(.failure(error))
-                                return
-                            }
-                            if let data = data {
-                                let result = try jsonDecoder.decode(Order.self, from: data)
-                                complection(.success(result))
-                            }
-                        }catch{
-                            print(error)
+                URLSession.shared.dataTask(with: request) { data, response, error in
+                    do{
+                        if let error = error {
+                            complection(.failure(error))
+                            return
                         }
-                    }.resume()
-                }catch{
-                    print(error)
-                    complection(.failure(error))
-                }
+                        if let data = data {
+                            let result = try jsonDecoder.decode(Order.self, from: data)
+                            complection(.success(result))
+                        }
+                    }catch{
+                        complection(.failure(error))
+                    }
+                }.resume()
+                
             }
         }
         
@@ -142,34 +126,24 @@ class APICaller {
     func deleteOrder(order: Order,complection: @escaping(Result<String, Error>)-> ()) {
         if let orderUUID = order.id {
             if let url = URL(string: APICaller.baseURL + "order/\(orderUUID)" ){
-                let jsonEncoder = JSONEncoder()
-                let jsonDecoder = JSONDecoder()
                 var request = URLRequest(url: url)
                 request.httpMethod = "DELETE"
                 request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-                do{
-                    URLSession.shared.dataTask(with: request) { data, response, error in
-                        do{
-                            if let error = error {
-                                print(error)
-                                complection(.failure(error))
-                                return
-                            }
-                            if let data = data, let result = String(data: data, encoding: .utf8) {
-                                print(result)
-                                if result.hasPrefix("Success"){
-                                    complection(.success(result))
-                                }
-                                print("Failed to del Order")
-                            }
-                        }catch{
-                            print("Delete Error: ",error)
+                URLSession.shared.dataTask(with: request) { data, response, error in
+                    if let error = error {
+                        print(error)
+                        complection(.failure(error))
+                        return
+                    }
+                    if let data = data, let result = String(data: data, encoding: .utf8) {
+                        print(result)
+                        if result.hasPrefix("Success"){
+                            complection(.success(result))
                         }
-                    }.resume()
-                }catch{
-                    print(error)
-                    complection(.failure(error))
-                }
+                        print("Failed to del Order")
+                    }
+                }.resume()
+                
             }
         }
         
@@ -180,25 +154,20 @@ class APICaller {
             if let url = URL(string: APICaller.baseURL + "orders/\(orderUUID)" ){
                 let jsonDecoder = JSONDecoder()
                 jsonDecoder.dateDecodingStrategy = .iso8601
-                do{
-                    URLSession.shared.dataTask(with: url) { data, response, error in
-                        do{
-                            if let error = error {
-                                complection(.failure(error))
-                                return
-                            }
-                            if let data = data {
-                                let result = try jsonDecoder.decode([Order].self, from: data)
-                                complection(.success(result))
-                            }
-                        }catch{
+                URLSession.shared.dataTask(with: url) { data, response, error in
+                    do{
+                        if let error = error {
                             complection(.failure(error))
+                            return
                         }
-                    }.resume()
-                }catch{
-                    print(error)
-                    complection(.failure(error))
-                }
+                        if let data = data {
+                            let result = try jsonDecoder.decode([Order].self, from: data)
+                            complection(.success(result))
+                        }
+                    }catch{
+                        complection(.failure(error))
+                    }
+                }.resume()
             }
         }
         
