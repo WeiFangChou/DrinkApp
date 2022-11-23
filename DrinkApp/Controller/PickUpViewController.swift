@@ -141,7 +141,7 @@ extension PickUpViewController: UITableViewDelegate, UITableViewDataSource {
             let nowDate = Date()
             let dateFormatter = DateFormatter()
             let dateString = dateFormatter.string(from: nowDate)
-            let order = Order(shopName: index.shopName, shopAddress: index.shopAddress, orderUUID: orderUUID, createdate: dateString)
+            let order = Order(shopName: index.shopName, shopAddress: index.shopAddress, orderUUID: orderUUID, drinks: [], createdate: dateString)
             self.preOrder(order: order)
         }
         let cancelAction = UIAlertAction(title: "取消", style: .cancel){ cancelAction in

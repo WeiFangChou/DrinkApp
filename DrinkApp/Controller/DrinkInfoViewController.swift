@@ -13,7 +13,11 @@ protocol DrinkInfoViewControllerDelegate{
 
 class DrinkInfoViewController: UIViewController {
     var delegate: DrinkInfoViewControllerDelegate?
-    var drink: Drinks
+    var drink: Drinks {
+        didSet{
+            print(drink)
+        }
+    }
     
     var sectionsData : [String: Array<String>] = ["尺寸":["大杯","中杯"],
                                                     "冰塊":["常溫","正常冰","少冰","去冰","微冰"],
@@ -74,6 +78,7 @@ class DrinkInfoViewController: UIViewController {
     }
     
     init(drink: Drinks){
+        print(drink)
         self.drink = drink
         super.init(nibName: nil, bundle: nil)
         titleDrinkInfolabel.text = drink.name
@@ -106,8 +111,8 @@ class DrinkInfoViewController: UIViewController {
             drinkinfoTableView.scrollToRow(at: IndexPath(row: 0, section: 2), at: .top, animated: true)
             return
         }
-        if drink.addon == nil {
-            drink.addon = []
+        if drink.addons == nil {
+            drink.addons = []
         }
         dismiss(animated: true) {
             self.delegate?.drinkInfoChanged(drink: self.drink)
@@ -116,7 +121,6 @@ class DrinkInfoViewController: UIViewController {
     }
     
     @objc func cancelDrinkInfo() {
-        
         dismiss(animated: true)
     }
 }
@@ -173,12 +177,12 @@ extension DrinkInfoViewController: UITableViewDelegate, UITableViewDataSource {
             case 2:
                 drink.sweet = Ice(rawValue: indexPath.row)!.rawValue
             case 3:
-                drink.addon?.removeAll()
+                drink.addons?.removeAll()
                 let rowsOfSection = tableView.numberOfRows(inSection: indexPath.section)
                 for selectIndex in 0...rowsOfSection{
                     if let cell = tableView.cellForRow(at: IndexPath(row: selectIndex, section: indexPath.section)) as? DrinkInfoTableViewCell, let addonName = cell.drinkInfoLabel.text {
                         if cell.isSelected {
-                            drink.addon?.append(addonName)
+                            drink.addons?.append(addonName)
                         }
                     }
                 }
@@ -198,5 +202,12 @@ extension DrinkInfoViewController: UITableViewDelegate, UITableViewDataSource {
             }
         }
         return indexPath
+    }
+    
+    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        if let cell = tableView.cellForRow(at: indexPath) as? DrinkInfoTableViewCell{
+            tableView.deselectRow(at: indexPath, animated: true)
+            cell.drinkInfoSelectImageView.image = UIImage(systemName: "moonphase.new.moon.inverse")
+        }
     }
 }

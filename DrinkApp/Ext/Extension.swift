@@ -11,58 +11,56 @@ import UIKit
 let imageCache = NSCache<AnyObject, AnyObject>()
 
 extension UIImageView {
-    func load(key: String, fromURL: String)  -> UIImageView {
-        let imageView = UIImageView()
+//    
+//    func load(from urlString: String?, keyString: String) -> UIImage?{
+//        if let imageFromCache = imageCache.object(forKey: keyString as NSString) as? UIImage {
+//            self.image = imageFromCache
+//            return self.image
+//        }
+//        guard let url = urlString, let url = URL(string: url) else {
+//            return nil
+//        }
+//        DispatchQueue.global().async {
+//            if let data = try? Data(contentsOf: url) {
+//                if let image = UIImage(data: data) {
+//                    DispatchQueue.main.async {
+//                        imageCache.setObject(image, forKey: keyString as NSString)
+//                        self.image = image
+//                    }
+//                }
+//            }
+//        }
+//        return self.image
+//    }
+    
+    func fetchImagefromURL(key: String, fromURL: String?) {
+        var imageView = UIImageView()
         let tempDirectory = FileManager.default.temporaryDirectory
         let tempFileUrl = tempDirectory.appendingPathComponent(key)
-        print(tempFileUrl.path)
+//        print(tempFileUrl.path)
         if FileManager.default.fileExists(atPath: tempFileUrl.path) {
             DispatchQueue.main.async {
                 self.image = UIImage(contentsOfFile: tempFileUrl.path)
             }
         }else{
             imageView.image = nil
-            if let url = URL(string: fromURL) {
+            if let fromURL = fromURL , let url = URL(string: fromURL) {
                 URLSession.shared.dataTask(with: url) { data, response, error in
                     if let error = error {
-                        print(error.localizedDescription)
+                        print(error)
                         return
                     }
                     if let data = data{
                         try? data.write(to: tempFileUrl)
                         DispatchQueue.main.async {
-                            imageView.image = UIImage(data: data)
+                            self.image = UIImage(data: data)
                         }
                     }
                 }.resume()
             }
         }
-        
-        return imageView
     }
     
-    func load(from urlString: String) -> UIImage?{
-        var resultImage = UIImage()
-        if let imageFromCache = imageCache.object(forKey: urlString as NSString) as? UIImage {
-            resultImage = imageFromCache
-            return resultImage
-        }
-        
-        guard let url = URL(string: urlString) else {
-            return nil
-        }
-        DispatchQueue.global().async { [weak self] in
-            if let data = try? Data(contentsOf: url) {
-                if let image = UIImage(data: data) {
-                    DispatchQueue.main.async {
-                        imageCache.setObject(image, forKey: urlString as NSString)
-                        resultImage = image
-                    }
-                }
-            }
-        }
-        return resultImage
-    }
 }
 
 

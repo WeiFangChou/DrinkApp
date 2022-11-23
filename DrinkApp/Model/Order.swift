@@ -32,7 +32,7 @@ struct Drinks: Codable {
     var cost: Int
     var ice: Int?
     var sweet: Int?
-    var addon: [String]?
+    var addons: [String]?
 }
 
 enum Ice: Int, Codable {

@@ -15,13 +15,13 @@ class HomeViewController: UIViewController {
     var sections: [String] = []
     
     lazy var homeTableView : UITableView = {
-        let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: 0, height: 0), style: .insetGrouped)
-        
+        let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height), style: .insetGrouped)
         tableView.allowsSelection = false
         tableView.register(UINib(nibName: "HomeTableViewCell", bundle: nil), forCellReuseIdentifier: "HomeTableViewCell")
         tableView.backgroundColor = .MilkGreen
         tableView.layer.bounds = view.bounds
-        tableView.rowHeight = 170
+        tableView.delegate = self
+        tableView.dataSource = self
         return tableView
     }()
     
@@ -38,28 +38,17 @@ class HomeViewController: UIViewController {
         setupUI()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        
-    }
-    
     func setupUI() {
         
-        print("HomeView")
-        view.backgroundColor = .MilkGreen
         title = "菜單"
         view.addSubview(homeTableView)
-        homeTableView.delegate = self
-        homeTableView.dataSource = self
         
         homeTableView.center = view.center
-//        homeTableView.backgroundView = tableViewBackgroundView
-        homeTableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
-        homeTableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
-        homeTableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
-        homeTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+        homeTableView.backgroundView = tableViewBackgroundView
+        homeTableView.anchor(top: view.topAnchor, bottom: view.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heighConstant: 0)
         fetchMenuData()
+        tabBarController?.tabBar.barTintColor = .white
+        tabBarController?.tabBar.tintColor = .black
     }
     
     
@@ -97,6 +86,10 @@ extension HomeViewController :  UITableViewDelegate, UITableViewDataSource {
         return self.dicMenus[sections[section]]!.count
     }
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 170
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "HomeTableViewCell", for: indexPath) as! HomeTableViewCell
         if let rows = self.dicMenus[sections[indexPath.section]] {
@@ -110,7 +103,7 @@ extension HomeViewController :  UITableViewDelegate, UITableViewDataSource {
             cell.caffeineImageView.image = row.caffeine ? UIImage(named: "caffeine") : UIImage()
             cell.recommendImageView.image = row.recommend ? UIImage(named: "recommend") : UIImage()
             cell.newImageView.image = row.new ? UIImage(named: "new") : UIImage()
-            cell.itemImageView.load(from: row.imageurl)
+            cell.itemImageView.fetchImagefromURL(key: row.id.uuidString, fromURL: row.imageurl)
         }
         return cell
         

@@ -49,18 +49,12 @@ class ShopViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
         setupUI()
     }
     
     
     func setupUI() {
-        
+        title = "商店"
         view.addSubview(shopTableView)
         shopTableView.tableHeaderView = shopCollectionView
        

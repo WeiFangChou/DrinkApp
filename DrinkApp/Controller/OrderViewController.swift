@@ -16,10 +16,10 @@ class OrderViewController: UIViewController {
         didSet{
             if let order = order, let count = order.drinks?.count{
                 if count > 0 {
-                    orderInfoLabel.text = "\(count)"
                     shoppingBagButton.setTitle("檢視購物車 (\(count))", for: .normal)
                     shoppingBagButton.isHidden = false
                 }
+                print(order)
             }
         }
     }
@@ -34,29 +34,9 @@ class OrderViewController: UIViewController {
         view.distribution = .fill
         view.alignment = .fill
         view.spacing = 0
-        view.addArrangedSubview(orderInfoView)
         view.addArrangedSubview(orderTableView)
         view.addArrangedSubview(shoppingBagButton)
         return view
-    }()
-    
-    lazy var orderInfoView : UIView = {
-        let view = UIView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: 50))
-        view.backgroundColor = .white
-        view.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        view.addSubview(orderInfoLabel)
-        
-        return view
-    }()
-    
-    lazy var orderInfoLabel : UILabel = {
-        let label = UILabel(frame: CGRect(x: 0, y: 5, width: 100, height: 20))
-        label.contentMode = .center
-        label.text = ""
-        label.textColor = .label
-        label.numberOfLines = 1
-        label.font = .systemFont(ofSize: 25)
-        return label
     }()
     
     lazy var orderTableView: UITableView = {
@@ -93,14 +73,14 @@ class OrderViewController: UIViewController {
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         if let order = order{
-            APICaller.shared.deleteOrder(order: order) { result in
-                switch result {
-                case .failure(let error):
-                    print("Error Delete : ",error)
-                case .success(let success):
-                    print("Success Delete : ",success)
-                }
-            }
+//            APICaller.shared.deleteOrder(order: order) { result in
+//                switch result {
+//                case .failure(let error):
+//                    print("Error Delete : ",error)
+//                case .success(let success):
+//                    print("Success Delete : ",success)
+//                }
+//            }
         }
         
     }
@@ -135,9 +115,6 @@ class OrderViewController: UIViewController {
         shoppingBagButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -35).isActive = true
         shoppingBagButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         
-        
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: nil)
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Done", style: .plain, target: self, action: nil)
     }
     
     @objc func cancelButtonTap(sender: UIButton) {
@@ -165,8 +142,7 @@ class OrderViewController: UIViewController {
     @objc func shoppingBagButtonTapped() {
         if let order = order {
             print(order)
-            let shopbagViewController = ShopBagViewController(order: order)
-            shopbagViewController.delegate = self
+            
             APICaller.shared.updateOrder(order: order) { [weak self] result in
                 guard let self = self else {return}
                 switch result {
@@ -175,6 +151,8 @@ class OrderViewController: UIViewController {
                 case .success(let success):
                     print(success)
                     DispatchQueue.main.async {
+                        let shopbagViewController = ShopBagViewController(order: order)
+                        shopbagViewController.delegate = self
                         self.present(shopbagViewController, animated: true)
                     }
                 }
@@ -206,7 +184,7 @@ extension OrderViewController: UITableViewDelegate, UITableViewDataSource {
         }
         if let rows = self.dicMenus[sections[indexPath.section]] {
             let row = rows[indexPath.row]
-            cell.selectImageView.load(from: row.imageurl)
+            cell.selectImageView.fetchImagefromURL(key: row.id.uuidString, fromURL: row.imageurl)
             cell.selectLabel.text = row.name
         }
         return cell
@@ -222,10 +200,11 @@ extension OrderViewController: UITableViewDelegate, UITableViewDataSource {
             return
         }
         if let row = self.dicMenus[sections[indexPath.section]]?[indexPath.row] {
-            let drink = Drinks(id: row.id, name: row.name, cost: row.largePrice)
+            let drink = Drinks(id: row.id, name: row.name, cost: row.largePrice,addons: [])
             let drinkInfoViewController = DrinkInfoViewController(drink: drink)
             drinkInfoViewController.delegate = self
             drinkInfoViewController.title = row.name
+            tableView.deselectRow(at: indexPath, animated: true)
             present(drinkInfoViewController, animated: true)
         }
     }
@@ -236,6 +215,8 @@ extension OrderViewController: UITableViewDelegate, UITableViewDataSource {
             headerView.textLabel?.textColor = .white
         }
     }
+    
+    
 }
 
 
@@ -243,8 +224,18 @@ extension OrderViewController: UIAdaptivePresentationControllerDelegate {
     func presentationControllerDidAttemptToDismiss(_ presentationController: UIPresentationController) {
         let alertController = UIAlertController(title: nil, message: "Cancel ?", preferredStyle: .actionSheet)
         let alertAction = UIAlertAction(title: "Discard Changes", style: .default) { alert in
-            self.showAlertView(title: "Error", message: "Failed to cancel order") {
-                
+            if let order = self.order{
+                APICaller().deleteOrder(order: order) { result in
+                    switch result {
+                        case .success(let success):
+                            print("Success Delete Order ...", success)
+                            DispatchQueue.main.async {
+                                self.dismiss(animated: true)
+                            }
+                        case .failure(let failure):
+                            print("Failed to del order : ",failure)
+                    }
+                }
             }
         }
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)

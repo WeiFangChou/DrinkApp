@@ -29,14 +29,13 @@ class HistoryViewController: UIViewController, HistoryTableViewCellDelegate{
     }()
     
     lazy var historyTableView : UITableView = {
-        let tableview = UITableView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: view.bounds.height), style: .insetGrouped)
+        let tableview = UITableView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height), style: .insetGrouped)
         tableview.register(UINib(nibName: "HistoryTableViewCell", bundle: nil), forCellReuseIdentifier: HistoryTableViewCell.Identifier)
         tableview.delegate = self
         tableview.dataSource = self
         tableview.allowsSelection = false
         tableview.backgroundView = noDataView
         tableview.addSubview(refreshControl)
-        tableview.backgroundColor = .MilkGreen
         return tableview
     }()
     
@@ -44,20 +43,18 @@ class HistoryViewController: UIViewController, HistoryTableViewCellDelegate{
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setupUI()
     }
     func setupUI() {
         title = "最近訂單"
-        
-        noDataView.isHidden = false
-        view.backgroundColor = .clear
         view.addSubview(historyTableView)
+        print("History")
+        noDataView.isHidden = false
+        historyTableView.backgroundColor = .MilkGreen
         historyTableView.center = view.center
-        historyTableView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-        historyTableView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
-        historyTableView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
-        historyTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        historyTableView.backgroundView = noDataView
+        historyTableView.anchor(top: view.safeAreaLayoutGuide.topAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, left: view.safeAreaLayoutGuide.leftAnchor, right: view.safeAreaLayoutGuide.rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heighConstant: 0)
+        
         fetchHistoryOrder()
     }
     
@@ -84,6 +81,7 @@ class HistoryViewController: UIViewController, HistoryTableViewCellDelegate{
                 case .failure(let failure):
                     DispatchQueue.main.async {
                         self.showAlertView(title: "Error", message: "Failed to fetch data"){
+                            self.orders.removeAll()
                             self.noDataView.isHidden = false
                             self.refreshControl.endRefreshing()
                         }
@@ -123,13 +121,16 @@ extension HistoryViewController: UITableViewDelegate, UITableViewDataSource{
         var cost = 0
         if let drinks = index.drinks {
             for drink in drinks {
-                if let addon = drink.addon?.count {
+                if let addon = drink.addons?.count {
                     cost += drink.cost + (addon * 10)
                 }
             }
         }
         cell.backgroundColor = .white
-        cell.orderDrinksImage.load(from: "https://www.milkshoptea.com/upload/product_catalog/2208261105400000001.png")
+        cell.orderDrinksImage.image = UIImage(systemName: "wineglass")
+        if let drinkID = index.drinks?[0].id{
+            cell.orderDrinksImage.fetchImagefromURL(key: drinkID.uuidString, fromURL: nil)
+        }
         cell.orderDrinksTitleLabel.text = index.shopName
         cell.orderDrinkssecTitleLabel.text = "\(index.drinks?.count ?? 0) 杯飲料・\(cost) 元"
         let dateFormatter = DateFormatter()

@@ -21,7 +21,6 @@
 		15492E2B28FD78300016C337 /* OrderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15492E2A28FD78300016C337 /* OrderViewController.swift */; };
 		15492E3028FD87790016C337 /* HistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15492E2E28FD87790016C337 /* HistoryTableViewCell.swift */; };
 		15492E3128FD87790016C337 /* HistoryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 15492E2F28FD87790016C337 /* HistoryTableViewCell.xib */; };
-		1555D3C128DB7B8900650C1C /* CustomBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1555D3C028DB7B8900650C1C /* CustomBarItem.swift */; };
 		1555D3C328DB7FAC00650C1C /* ShopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1555D3C228DB7FAC00650C1C /* ShopViewController.swift */; };
 		1555D3C628E02DD200650C1C /* HomeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1555D3C428E02DD200650C1C /* HomeTableViewCell.swift */; };
 		1555D3C728E02DD200650C1C /* HomeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1555D3C528E02DD200650C1C /* HomeTableViewCell.xib */; };
@@ -42,11 +41,9 @@
 		15D42936291032FE0050BBFE /* ShopBagTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D42934291032FE0050BBFE /* ShopBagTableViewCell.swift */; };
 		15D42937291032FE0050BBFE /* ShopBagTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 15D42935291032FE0050BBFE /* ShopBagTableViewCell.xib */; };
 		15F6420A28E0537400A9A545 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15F6420928E0537400A9A545 /* Extension.swift */; };
-		15FAA06828DB73EF009D77D1 /* HomeNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15FAA06728DB73EF009D77D1 /* HomeNavigationController.swift */; };
 		15FAA06A28DB7445009D77D1 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15FAA06928DB7445009D77D1 /* HomeViewController.swift */; };
 		15FAA06C28DB748D009D77D1 /* PickUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15FAA06B28DB748D009D77D1 /* PickUpViewController.swift */; };
 		15FAA06E28DB7799009D77D1 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15FAA06D28DB7799009D77D1 /* MainTabBarController.swift */; };
-		15FAA07028DB781C009D77D1 /* CustomTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15FAA06F28DB781C009D77D1 /* CustomTabBarController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -66,7 +63,6 @@
 		15492E2A28FD78300016C337 /* OrderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderViewController.swift; sourceTree = "<group>"; };
 		15492E2E28FD87790016C337 /* HistoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryTableViewCell.swift; sourceTree = "<group>"; };
 		15492E2F28FD87790016C337 /* HistoryTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HistoryTableViewCell.xib; sourceTree = "<group>"; };
-		1555D3C028DB7B8900650C1C /* CustomBarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomBarItem.swift; sourceTree = "<group>"; };
 		1555D3C228DB7FAC00650C1C /* ShopViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopViewController.swift; sourceTree = "<group>"; };
 		1555D3C428E02DD200650C1C /* HomeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTableViewCell.swift; sourceTree = "<group>"; };
 		1555D3C528E02DD200650C1C /* HomeTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeTableViewCell.xib; sourceTree = "<group>"; };
@@ -87,11 +83,9 @@
 		15D42934291032FE0050BBFE /* ShopBagTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopBagTableViewCell.swift; sourceTree = "<group>"; };
 		15D42935291032FE0050BBFE /* ShopBagTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ShopBagTableViewCell.xib; sourceTree = "<group>"; };
 		15F6420928E0537400A9A545 /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
-		15FAA06728DB73EF009D77D1 /* HomeNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeNavigationController.swift; sourceTree = "<group>"; };
 		15FAA06928DB7445009D77D1 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		15FAA06B28DB748D009D77D1 /* PickUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickUpViewController.swift; sourceTree = "<group>"; };
 		15FAA06D28DB7799009D77D1 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
-		15FAA06F28DB781C009D77D1 /* CustomTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBarController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -152,7 +146,6 @@
 			children = (
 				15968D2628E0326400E28278 /* Storyboard */,
 				15968D2728E0327B00E28278 /* Cell */,
-				1555D3C028DB7B8900650C1C /* CustomBarItem.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -160,8 +153,6 @@
 		15968D2228E031DB00E28278 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				15FAA06F28DB781C009D77D1 /* CustomTabBarController.swift */,
-				15FAA06728DB73EF009D77D1 /* HomeNavigationController.swift */,
 				15FAA06D28DB7799009D77D1 /* MainTabBarController.swift */,
 				15FAA06928DB7445009D77D1 /* HomeViewController.swift */,
 				1555D3C228DB7FAC00650C1C /* ShopViewController.swift */,
@@ -324,7 +315,6 @@
 				1534EB5F28C6429100BBE7D0 /* AppDelegate.swift in Sources */,
 				1555D3C328DB7FAC00650C1C /* ShopViewController.swift in Sources */,
 				1544BD412920E29300614B70 /* OrderDetailTableViewCell.swift in Sources */,
-				15FAA07028DB781C009D77D1 /* CustomTabBarController.swift in Sources */,
 				15B8F94A2908368B00E7F3F8 /* DrinkInfoViewController.swift in Sources */,
 				15D42936291032FE0050BBFE /* ShopBagTableViewCell.swift in Sources */,
 				15492E2928FBF45D0016C337 /* Order.swift in Sources */,
@@ -337,7 +327,6 @@
 				15492E2628FBEE530016C337 /* PickupTableViewCell.swift in Sources */,
 				15492E3028FD87790016C337 /* HistoryTableViewCell.swift in Sources */,
 				1544BD3C291A9A0200614B70 /* OrderDetailViewController.swift in Sources */,
-				1555D3C128DB7B8900650C1C /* CustomBarItem.swift in Sources */,
 				15FAA06C28DB748D009D77D1 /* PickUpViewController.swift in Sources */,
 				15492E2B28FD78300016C337 /* OrderViewController.swift in Sources */,
 				1534EB6128C6429100BBE7D0 /* SceneDelegate.swift in Sources */,
@@ -346,7 +335,6 @@
 				15492E2128FBEC740016C337 /* HistoryViewController.swift in Sources */,
 				1587A84528F599110086B564 /* ShopCollectionViewCell.swift in Sources */,
 				1575D2FF2902582900A8423F /* City.swift in Sources */,
-				15FAA06828DB73EF009D77D1 /* HomeNavigationController.swift in Sources */,
 				15FAA06A28DB7445009D77D1 /* HomeViewController.swift in Sources */,
 				1587A84828F6EF550086B564 /* Shop.swift in Sources */,
 			);

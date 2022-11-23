@@ -8,7 +8,15 @@
 import UIKit
 
 
+protocol OrderDetailHeaderViewDelegate {
+    func orderDetailUpdated(with status: String)
+}
+
 class OrderDetailViewController: UIViewController {
+    
+    var delegate : OrderDetailHeaderViewDelegate?
+    
+    
     
     lazy var shopBagInfoTableView : UITableView = {
         let table = UITableView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height), style: .insetGrouped)
@@ -31,9 +39,7 @@ class OrderDetailViewController: UIViewController {
     func setupUI() {
         view.backgroundColor = .SkyBlue
         view.addSubview(shopBagInfoTableView)
-        
         shopBagInfoTableView.anchor(top: view.topAnchor, bottom: view.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heighConstant: 0)
-        
         
     }
     
@@ -46,8 +52,9 @@ class OrderDetailViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    
-    
+    func updateOrderDetail(with status: String) {
+        delegate?.orderDetailUpdated(with: status)
+    }
     
 }
 
@@ -65,9 +72,32 @@ extension OrderDetailViewController: UITableViewDelegate, UITableViewDataSource 
         }
         if let drinks = order?.drinks{
             let row = drinks[indexPath.row]
-            
+            cell.drinkNameLabel.text = row.name
+            var detailStr = ""
+            if let drinkSize = row.size {
+                detailStr += "\(drinkSize) "
+            }
+            if let drinkIce = row.ice {
+                detailStr += "\(Ice(rawValue: drinkIce)!.value) "
+            }
+            if let drinkSweet = row.sweet {
+                detailStr += "\(Sugar(rawValue: drinkSweet)!.value)"
+            }
+            if let drinkAddon = row.addons{
+                detailStr += "\n"
+                drinkAddon.forEach({ detailStr += "\($0) "})
+            }
+            cell.drinkDetailLabel.numberOfLines = 0
+            cell.drinkDetailLabel.text = detailStr
+            cell.drinkCostLabel.text = "\(row.cost)"
+            cell.drinkImageView.fetchImagefromURL(key: row.id.uuidString, fromURL: nil)
         }
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 140
+    }
+    
     
 }

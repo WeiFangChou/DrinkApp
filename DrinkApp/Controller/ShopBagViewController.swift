@@ -21,6 +21,7 @@ class ShopBagViewController: UIViewController {
         tableView.register(UINib(nibName: ShopBagTableViewCell.Identifier, bundle: nil), forCellReuseIdentifier: ShopBagTableViewCell.Identifier)
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.allowsSelection = false
         return tableView
     }()
     
@@ -97,14 +98,14 @@ extension ShopBagViewController: UITableViewDelegate, UITableViewDataSource {
                 detail += Sugar(rawValue: drinkSweet)!.value
             }
             
-            if let addons = row.addon {
+            if let addons = row.addons {
                 detail += "\n"
                 addons.forEach { addon in
-                    detail += addon
+                    detail += "\(addon), "
                 }
             }
             cell.drinkNameLabel.text = row.name
-            cell.drinkImageView.load(from: "https://www.milkshoptea.com/upload/product_catalog/2208261105400000001.png")
+            cell.drinkImageView.fetchImagefromURL(key: row.id.uuidString, fromURL: nil)
             cell.drinkDetailLabel.numberOfLines = 0
             cell.drinkDetailLabel.text = detail
         }

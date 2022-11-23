@@ -12,12 +12,7 @@ class MainTabBarController: UITabBarController, UITabBarControllerDelegate{
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
-    }
-
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
+        print(APICaller.baseURL)
         
         let homeViewController = HomeViewController()
         let homeNavigationController = navController(controller: homeViewController, title: "菜單", selectedImage: #imageLiteral(resourceName: "menu selected.png"), unselectImage: #imageLiteral(resourceName: "menu selected"))
@@ -31,9 +26,15 @@ class MainTabBarController: UITabBarController, UITabBarControllerDelegate{
         let historyViewController = HistoryViewController()
         historyViewController.delegate = drinkViewController
         let historyNavigationController = navController(controller: historyViewController, title: "最近訂單", selectedImage: #imageLiteral(resourceName: "history selected"), unselectImage: #imageLiteral(resourceName: "history unselect"))
-        
-        tabBar.tintColor = .black
+        self.tabBar.isTranslucent = false
+        self.tabBar.barTintColor = UIColor.white
+        self.tabBar.tintColor = UIColor.black
         viewControllers = [homeNavigationController, drinkNavigationController, shopNavigationController, historyNavigationController]
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
         
     }
     
@@ -42,24 +43,9 @@ class MainTabBarController: UITabBarController, UITabBarControllerDelegate{
         navController.tabBarItem.selectedImage = selectedImage.withRenderingMode(.alwaysOriginal)
         navController.tabBarItem.image = unselectImage.withRenderingMode(.alwaysOriginal)
         navController.title = title
-        
+        navController.tabBarController?.tabBar.tintColor = .black
+        navController.tabBarController?.tabBar.barTintColor = .white
         return navController
-    }
-
-    
-    func settingTabbarItem() {
-
-    }
-    
-    @objc func tapPickButton() {
-        
-        print("Pickup")
-        
-        
-    }
-    
-    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
-        
     }
 
     

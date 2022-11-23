@@ -11,13 +11,13 @@ import UIKit
 
 class APICaller {
     
-    static var menuBaseURL = ProcessInfo.processInfo.environment["apiUrl"] ?? "https://api.fangs.dev/"
+    static var baseURL = ProcessInfo.processInfo.environment["apiUrl"] ?? "https://api.fangs.dev/"
     static let shared = APICaller()
     
     
     
     func getMenu(complection: @escaping(Result<[Menu] ,Error>) -> ()) {
-        if let url = URL(string: APICaller.menuBaseURL + "get/milkshamenu") {
+        if let url = URL(string: APICaller.baseURL + "get/milkshamenu") {
             
             URLSession.shared.dataTask(with: url) { data, response, error in
                 if let error = error {
@@ -41,7 +41,7 @@ class APICaller {
     
     func createOrder(order: Order,complection: @escaping(Result<Order, Error>)-> ()) {
         
-        if let url = URL(string: APICaller.menuBaseURL + "order" ){
+        if let url = URL(string: APICaller.baseURL + "order" ){
             let jsonEncoder = JSONEncoder()
             let jsonDecoder = JSONDecoder()
             var request = URLRequest(url: url)
@@ -74,7 +74,7 @@ class APICaller {
     }
     func updateOrder(order: Order,complection: @escaping(Result<Order, Error>)-> ()) {
         if let orderUUID = order.id {
-            if let url = URL(string: APICaller.menuBaseURL + "order/\(orderUUID)" ){
+            if let url = URL(string: APICaller.baseURL + "order/\(orderUUID)" ){
                 let jsonEncoder = JSONEncoder()
                 let jsonDecoder = JSONDecoder()
                 var request = URLRequest(url: url)
@@ -108,7 +108,7 @@ class APICaller {
     }
     func getOrder(order: Order,complection: @escaping(Result<Order, Error>)-> ()) {
         if let orderUUID = order.id {
-            if let url = URL(string: APICaller.menuBaseURL + "order/\(orderUUID)" ){
+            if let url = URL(string: APICaller.baseURL + "order/\(orderUUID)" ){
                 let jsonEncoder = JSONEncoder()
                 let jsonDecoder = JSONDecoder()
                 var request = URLRequest(url: url)
@@ -139,9 +139,9 @@ class APICaller {
         }
         
     }
-    func deleteOrder(order: Order,complection: @escaping(Result<Order, Error>)-> ()) {
+    func deleteOrder(order: Order,complection: @escaping(Result<String, Error>)-> ()) {
         if let orderUUID = order.id {
-            if let url = URL(string: APICaller.menuBaseURL + "order/\(orderUUID)" ){
+            if let url = URL(string: APICaller.baseURL + "order/\(orderUUID)" ){
                 let jsonEncoder = JSONEncoder()
                 let jsonDecoder = JSONDecoder()
                 var request = URLRequest(url: url)
@@ -151,15 +151,19 @@ class APICaller {
                     URLSession.shared.dataTask(with: request) { data, response, error in
                         do{
                             if let error = error {
+                                print(error)
                                 complection(.failure(error))
                                 return
                             }
-                            if let data = data {
-                                let result = try jsonDecoder.decode(Order.self, from: data)
-                                complection(.success(result))
+                            if let data = data, let result = String(data: data, encoding: .utf8) {
+                                print(result)
+                                if result.hasPrefix("Success"){
+                                    complection(.success(result))
+                                }
+                                print("Failed to del Order")
                             }
                         }catch{
-                            print(error)
+                            print("Delete Error: ",error)
                         }
                     }.resume()
                 }catch{
@@ -173,7 +177,7 @@ class APICaller {
     
     func getOrders(orderUUID: String,complection: @escaping(Result<[Order], Error>)-> ()) {
         if let orderUUID = UUID(uuidString: orderUUID) {
-            if let url = URL(string: APICaller.menuBaseURL + "orders/\(orderUUID)" ){
+            if let url = URL(string: APICaller.baseURL + "orders/\(orderUUID)" ){
                 let jsonDecoder = JSONDecoder()
                 jsonDecoder.dateDecodingStrategy = .iso8601
                 do{
