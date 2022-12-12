@@ -11,7 +11,7 @@ import UIKit
 
 class APICaller {
     
-    static var baseURL = ProcessInfo.processInfo.environment["apiUrl"] ?? "https://api.fangs.dev/"
+    static var baseURL = "https://api.domain.dev"
     static let shared = APICaller()
     
     
@@ -39,7 +39,6 @@ class APICaller {
     }
     
     func createOrder(order: Order,complection: @escaping(Result<Order, Error>)-> ()) {
-        
         if let url = URL(string: APICaller.baseURL + "order" ){
             let jsonEncoder = JSONEncoder()
             let jsonDecoder = JSONDecoder()
@@ -88,7 +87,7 @@ class APICaller {
                                 let result = try jsonDecoder.decode(Order.self, from: data)
                                 complection(.success(result))
                             }
-                        }catch{
+                        }catch (let error){
                             print(error)
                             complection(.failure(error))
                         }
@@ -114,7 +113,7 @@ class APICaller {
                             let result = try jsonDecoder.decode(Order.self, from: data)
                             complection(.success(result))
                         }
-                    }catch{
+                    }catch (let error){
                         complection(.failure(error))
                     }
                 }.resume()
@@ -139,14 +138,14 @@ class APICaller {
                         print(result)
                         if result.hasPrefix("Success"){
                             complection(.success(result))
+                        }else{
+                            print("Failed to delete Order")
                         }
-                        print("Failed to del Order")
                     }
                 }.resume()
                 
             }
         }
-        
     }
     
     func getOrders(orderUUID: String,complection: @escaping(Result<[Order], Error>)-> ()) {
@@ -164,7 +163,7 @@ class APICaller {
                             let result = try jsonDecoder.decode([Order].self, from: data)
                             complection(.success(result))
                         }
-                    }catch{
+                    }catch (let error){
                         complection(.failure(error))
                     }
                 }.resume()
